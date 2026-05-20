@@ -1,6 +1,6 @@
 ---
-title: "Analyse des Incohérences GPS dans les Données de l'EACI 2017 au Mali"
-subtitle: "Rapport Méthodologique et Analytique"
+title: "Analyse des Incoherences GPS dans les Donnees de l'EACI 2017 au Mali"
+subtitle: "Rapport Methodologique et Analytique"
 author: "Abdoul Kader ZONGO"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 fontsize: 12pt
@@ -39,11 +39,9 @@ header-includes:
   - \definecolor{RougeBox}{HTML}{FDEDEC}
   - \definecolor{OrBox}{HTML}{FEF9E7}
   - \usepackage{fancyhdr}
-  - \setlength{\headheight}{13.6pt}
-  - \addtolength{\topmargin}{-1.6pt}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{\small\textcolor{MarineDeep}{\textbf{EACI Mali 2017}} \textcolor{GrisMid}{\textbar\ Qualité GPS}}
+  - \fancyhead[L]{\small\textcolor{MarineDeep}{\textbf{EACI Mali 2017}} \textcolor{GrisMid}{\textbar\ Qualite GPS}}
   - \fancyhead[R]{\small\textcolor{MarineMid}{\textbf{A.K. ZONGO} --- ISEP2 S4}}
   - \fancyfoot[C]{\textcolor{MarineMid}{\small\thepage}}
   - \fancyfoot[L]{\textcolor{GrisMid}{\tiny ENSAE Pierre Ndiaye --- 2025-2026}}
@@ -190,7 +188,7 @@ mk   <- function(b,l) data.frame(Etape=l,N=nrow(b),
   HV8=round(mean(b$hybrid_V8,na.rm=TRUE),2),
   Dist=round(mean(b$distance_centre,na.rm=TRUE)/1000,2))
 est_av <- mk(b_av,"Avant correction")
-est_ap <- mk(b_ap,"Après correction")
+est_ap <- mk(b_ap,"Apres correction")
 
 sens <- data.frame()
 for(q in c(0.90,0.95,0.975)){
@@ -201,12 +199,12 @@ for(q in c(0.90,0.95,0.975)){
     Surf=round(mean(bt$surface_cultivee_ha,na.rm=TRUE),3),NDVI=round(mean(bt$ndvi_avg,na.rm=TRUE),4)))}
 
 biais <- donnees %>%
-  mutate(st=ifelse(decision%in%c("Exclure hors territoire","Exclure fraude"),"Exclus","Conservés")) %>%
+  mutate(st=ifelse(decision%in%c("Exclure hors territoire","Exclure fraude"),"Exclus","Conserves")) %>%
   group_by(st) %>% summarise(N=n(),NDVI=round(mean(ndvi_avg,na.rm=TRUE),4),
     TWI=round(mean(twi,na.rm=TRUE),3),Pluie=round(mean(anntot_avg,na.rm=TRUE),0),
     Route=round(mean(dist_road,na.rm=TRUE),1),Alt=round(mean(srtm_1k,na.rm=TRUE),0),.groups="drop")
 ndvi_ex  <- biais$NDVI[biais$st=="Exclus"]
-ndvi_co  <- biais$NDVI[biais$st=="Conservés"]
+ndvi_co  <- biais$NDVI[biais$st=="Conserves"]
 diff_ndvi<- ifelse(length(ndvi_ex)>0,round(abs(ndvi_ex-ndvi_co)/ndvi_co*100,1),NA)
 
 pc <- st_transform(pts_sf,4326)
@@ -236,9 +234,9 @@ surf_moy <- round(mean(donnees$surface_cultivee_ha,na.rm=TRUE),2)
 \vspace{1.8cm}
 \begin{tcolorbox}[enhanced,colback=MarineDeep,colframe=OrAccent,width=0.92\textwidth,
   arc=6mm,boxrule=2pt,center,halign=center,top=0.8cm,bottom=0.8cm,drop shadow={opacity=0.3}]
-  {\huge\bfseries\color{white} Analyse des Incohérences GPS}\\[0.4cm]
-  {\large\color{BleuPale} dans les Données de l'EACI 2017 au Mali}\\[0.3cm]
-  {\small\color{OrAccent}\itshape Détection --- Classification --- Traitement des Anomalies Géographiques}
+  {\huge\bfseries\color{white} Analyse des Incoherences GPS}\\[0.4cm]
+  {\large\color{BleuPale} dans les Donnees de l'EACI 2017 au Mali}\\[0.3cm]
+  {\small\color{OrAccent}\itshape Detection --- Classification --- Traitement des Anomalies Geographiques}
 \end{tcolorbox}
 
 \vspace{1.5cm}
@@ -249,13 +247,13 @@ surf_moy <- round(mean(donnees$surface_cultivee_ha,na.rm=TRUE),2)
     \textcolor{GrisMid}{\small\textbf{Professeur}}& DIALLO Mouhamadou Hady\\[4pt]
     \textcolor{GrisMid}{\small\textbf{Niveau}}    & ISEP2 --- Semestre 4\\[4pt]
     \textcolor{GrisMid}{\small\textbf{Cours}}     & Traitements Statistiques avec R\\[4pt]
-    \textcolor{GrisMid}{\small\textbf{Année}}     & 2025 --- 2026
+    \textcolor{GrisMid}{\small\textbf{Annee}}     & 2025 --- 2026
   \end{tabular}
 \end{tcolorbox}
 
 \vspace{1.2cm}
 {\color{OrAccent}\rule{0.6\textwidth}{1.5pt}}\\[0.4cm]
-{\small\textcolor{GrisMid}{\textit{ENSAE Pierre Ndiaye --- Dakar, Sénégal}}}\\[0.2cm]
+{\small\textcolor{GrisMid}{\textit{ENSAE Pierre Ndiaye --- Dakar, Senegal}}}\\[0.2cm]
 {\small\textcolor{MarineMid}{`r format(Sys.Date(),'%d %B %Y')`}}
 \end{titlepage}
 
@@ -263,35 +261,34 @@ surf_moy <- round(mean(donnees$surface_cultivee_ha,na.rm=TRUE),2)
 
 \newpage\thispagestyle{empty}\vspace*{6cm}
 \begin{center}
-{\LARGE\bfseries\textcolor{MarineDeep}{DÉCHARGE}}\\[1.2cm]
+{\LARGE\bfseries\textcolor{MarineDeep}{DECHARGE}}\\[1.2cm]
 \begin{tcolorbox}[colback=GrisClair,colframe=GrisMid,width=0.82\textwidth,arc=3mm,
   boxrule=0.8pt,center,halign=justify,top=0.4cm,bottom=0.4cm]
-\small\itshape L'auteur se porte entièrement responsable des propos et positions tenus dans ce document. Ainsi, ceux-ci n'engagent ni l'École Nationale de la Statistique et de l'Analyse Économique (ENSAE Pierre Ndiaye), ni la Banque Mondiale, ni aucune autre institution mentionnée dans ce rapport.
+\small\itshape L'auteur se porte entierement responsable des propos et positions tenus dans ce document. Ainsi, ceux-ci n'engagent ni l'Ecole Nationale de la Statistique et de l'Analyse Economique (ENSAE Pierre Ndiaye), ni la Banque Mondiale, ni aucune autre institution mentionnee dans ce rapport.
 \end{tcolorbox}
 \end{center}
 
 \newpage
-\renewcommand{\contentsname}{\textcolor{MarineDeep}{Table des matières}}
+\renewcommand{\contentsname}{\textcolor{MarineDeep}{Table des matieres}}
 \tableofcontents\newpage
 \listoffigures\newpage
 \listoftables\newpage
 
 <!-- ══════════ ABREVIATIONS ══════════ -->
 
-# LISTE DES ABRÉVIATIONS {-}
+# LISTE DES ABREVIATIONS {-}
 
 \begin{center}
-\begin{tcolorbox}[colback=BleuBox,colframe=MarineMid,arc=3mm,boxrule=0.8pt,top=0.3cm,bottom=0.3cm,width=0.95\textwidth]
-\begin{tabular}{p{2.2cm}p{10cm}}
-\textbf{DBSCAN}   & Density-Based Spatial Clustering of Applications with Noise \\[4pt]
-\textbf{EACI}     & Enquête Agricole de Conjoncture Intégrée \\[4pt]
-\textbf{EPSG}     & European Petroleum Survey Group (système de coordonnées) \\[4pt]
-\textbf{GPS}      & Global Positioning System \\[4pt]
-\textbf{LSMS-ISA} & Living Standards Measurement Study --- \\
-                  & Integrated Surveys on Agriculture \\[4pt]
-\textbf{NDVI}     & Normalized Difference Vegetation Index \\[4pt]
-\textbf{TWI}      & Topographic Wetness Index \\[4pt]
-\textbf{UTM}      & Universal Transverse Mercator \\[4pt]
+\begin{tcolorbox}[colback=BleuBox,colframe=MarineMid,arc=3mm,boxrule=0.8pt,top=0.3cm,bottom=0.3cm,width=0.85\textwidth]
+\begin{tabular}{ll}
+\textbf{DBSCAN}   & Density-Based Spatial Clustering of Applications with Noise \\[2pt]
+\textbf{EACI}     & Enquete Agricole de Conjoncture Integree \\[2pt]
+\textbf{EPSG}     & European Petroleum Survey Group (systeme de coordonnees) \\[2pt]
+\textbf{GPS}      & Global Positioning System \\[2pt]
+\textbf{LSMS-ISA} & Living Standards Measurement Study --- Integrated Surveys on Agriculture \\[2pt]
+\textbf{NDVI}     & Normalized Difference Vegetation Index \\[2pt]
+\textbf{TWI}      & Topographic Wetness Index \\[2pt]
+\textbf{UTM}      & Universal Transverse Mercator \\[2pt]
 \textbf{WGS84}    & World Geodetic System 1984 \\
 \end{tabular}
 \end{tcolorbox}
@@ -301,11 +298,11 @@ surf_moy <- round(mean(donnees$surface_cultivee_ha,na.rm=TRUE),2)
 
 <!-- ══════════ RESUME EXECUTIF ══════════ -->
 
-# RÉSUMÉ EXÉCUTIF {-}
+# RESUME EXECUTIF {-}
 
 \begin{center}
 \begin{tcolorbox}[colback=BleuBox,colframe=MarineDeep,arc=4mm,boxrule=1.2pt,
-  title={\textbf{Synthèse des résultats clés}},
+  title={\textbf{Synthese des resultats cles}},
   fonttitle=\bfseries\color{white},colbacktitle=MarineDeep,
   top=0.3cm,bottom=0.3cm,width=0.88\textwidth]
 \centering
@@ -313,13 +310,13 @@ surf_moy <- round(mean(donnees$surface_cultivee_ha,na.rm=TRUE),2)
 \toprule
 \textbf{Indicateur} & \textbf{N} & \textbf{\%} \\
 \midrule
-Total observations analysées        & `r N`      & 100,0\% \\
-Observations de bonne qualité       & `r n_bon`  & `r round(100*n_bon/N,1)`\% \\
-Observations à vérifier             & `r n_aver` & `r round(100*n_aver/N,1)`\% \\
+Total observations analysees        & `r N`      & 100,0\% \\
+Observations de bonne qualite       & `r n_bon`  & `r round(100*n_bon/N,1)`\% \\
+Observations a verifier             & `r n_aver` & `r round(100*n_aver/N,1)`\% \\
 Observations suspectes              & `r n_susp` & `r round(100*n_susp/N,1)`\% \\
-Doublons détectés (dont jittering)  & `r n_doub` (dont `r n_jitr`) & `r round(100*n_doub/N,1)`\% \\
+Doublons detectes (dont jittering)  & `r n_doub` (dont `r n_jitr`) & `r round(100*n_doub/N,1)`\% \\
 Outliers spatiaux (Q95\%)           & `r n_outl` & `r round(100*n_outl/N,1)`\% \\
-Observations exclues définitivement & `r n_excl` & `r round(100*n_excl/N,2)`\% \\
+Observations exclues definitivement & `r n_excl` & `r round(100*n_excl/N,2)`\% \\
 \bottomrule
 \end{tabular}
 \end{tcolorbox}
@@ -327,11 +324,11 @@ Observations exclues définitivement & `r n_excl` & `r round(100*n_excl/N,2)`\% 
 
 \vspace{0.4cm}
 
-**Contexte et justification.** Ce rapport présente un diagnostic complet et reproductible de la qualité des coordonnées GPS de l'Enquête Agricole de Conjoncture Intégrée (EACI) 2017 au Mali, conduite dans le cadre du programme LSMS-ISA de la Banque mondiale. Le fichier analysé --- \texttt{eaci\_geovariables\_2017.csv} --- contient les coordonnées GPS jitterisées de **`r N` exploitations agricoles**, accompagnées de 36 variables géographiques couvrant la topographie, la végétation, le climat et les infrastructures.
+**Contexte et justification.** Ce rapport presente un diagnostic complet et reproductible de la qualite des coordonnees GPS de l'Enquete Agricole de Conjoncture Integree (EACI) 2017 au Mali, conduite dans le cadre du programme LSMS-ISA de la Banque mondiale. Le fichier analyse --- \texttt{eaci\_geovariables\_2017.csv} --- contient les coordonnees GPS jitterisees de **`r N` exploitations agricoles**, accompagnees de 36 variables geographiques couvrant la topographie, la vegetation, le climat et les infrastructures.
 
-**Une méthodologie renforcée.** La méthodologie déployée s'articule autour de **six étapes séquentielles** et anticipe explicitement **trois pièges méthodologiques majeurs** que le praticien non averti commettrait facilement : confondre une erreur de projection avec une vraie anomalie GPS **(P1)**, exclure des doublons pourtant légitimes **(P2)**, et introduire un biais de sélection non documenté lors des exclusions **(P3)**.
+**Une methodologie renforcee.** La methodologie deployee s'articule autour de **six etapes sequentielles** et anticipe explicitement **trois pieges methodologiques majeurs** que le praticien non averti commettrait facilement : confondre une erreur de projection avec une vraie anomalie GPS **(P1)**, exclure des doublons pourtant legitimes **(P2)**, et introduire un biais de selection non documente lors des exclusions **(P3)**.
 
-**Des résultats rassurants.** Le diagnostic révèle une base **globalement de bonne qualité** : `r round(100*n_bon/N,1)`% des exploitations ne présentent aucune anomalie détectable. Seul `r sum(donnees$hors_mali_reel)` point GPS se situe hors du territoire malien après vérification dans deux systèmes de projection. Les `r n_doub` doublons détectés sont, dans leur quasi-totalité (`r n_jitr` sur `r n_doub`), le résultat du jittering intentionnel appliqué par la Banque mondiale pour protéger la confidentialité des ménages --- et non des erreurs de collecte. La surface cultivée moyenne estimée s'établit à **`r surf_moy` ha** par exploitation.
+**Des resultats rassurants.** Le diagnostic revele une base **globalement de bonne qualite** : `r round(100*n_bon/N,1)`% des exploitations ne presentent aucune anomalie detectable. Seul `r sum(donnees$hors_mali_reel)` point GPS se situe hors du territoire malien apres verification dans deux systemes de projection. Les `r n_doub` doublons detectes sont, dans leur quasi-totalite (`r n_jitr` sur `r n_doub`), le resultat du jittering intentionnel applique par la Banque mondiale pour proteger la confidentialite des menages --- et non des erreurs de collecte. La surface cultivee moyenne estimee s'etablit a **`r surf_moy` ha** par exploitation.
 
 \newpage
 
@@ -341,23 +338,23 @@ Observations exclues définitivement & `r n_excl` & `r round(100*n_excl/N,2)`\% 
 
 ## Contexte et justification {-}
 
-Le Mali est un pays à forte vocation agricole où le secteur primaire joue un rôle déterminant dans l'économie nationale et dans les moyens de subsistance de la majorité de la population rurale. La production de statistiques agricoles fiables et géoréférencées constitue donc un enjeu stratégique de premier plan pour les décideurs, les bailleurs de fonds et les chercheurs.
+Le Mali est un pays a forte vocation agricole ou le secteur primaire joue un role determinant dans l'economie nationale et dans les moyens de subsistance de la majorite de la population rurale. La production de statistiques agricoles fiables et georeferancees constitue donc un enjeu strategique de premier plan pour les decideurs, les bailleurs de fonds et les chercheurs.
 
-L'Enquête Agricole de Conjoncture Intégrée (EACI) 2017, conduite dans le cadre du programme LSMS-ISA (*Living Standards Measurement Study --- Integrated Surveys on Agriculture*) de la Banque mondiale, constitue l'un des principaux dispositifs de collecte de données sur les exploitations agricoles maliennes. Elle intègre des coordonnées GPS permettant de localiser chaque exploitation sur le territoire national. Ces coordonnées ouvrent des perspectives analytiques considérables : estimation des superficies cultivées par télémétrie, croisement avec des données satellitaires (NDVI, précipitation), et analyse spatiale de la distribution des rendements et des pratiques agricoles.
+L'Enquete Agricole de Conjoncture Integree (EACI) 2017, conduite dans le cadre du programme LSMS-ISA (*Living Standards Measurement Study --- Integrated Surveys on Agriculture*) de la Banque mondiale, constitue l'un des principaux dispositifs de collecte de donnees sur les exploitations agricoles maliennes. Elle integre des coordonnees GPS permettant de localiser chaque exploitation sur le territoire national. Ces coordonnees ouvrent des perspectives analytiques considerables : estimation des superficies cultivees par telemetrie, croisement avec des donnees satellitaires (NDVI, precipitation), et analyse spatiale de la distribution des rendements et des pratiques agricoles.
 
-## Problématique {-}
+## Problematique {-}
 
-La collecte de coordonnées GPS sur le terrain est une opération techniquement délicate, sujette à de multiples sources d'erreur. Un enquêteur qui enregistre une coordonnée sans attendre la stabilisation du signal GPS, qui inverse les champs latitude et longitude lors de la saisie manuelle, ou --- dans des cas plus graves --- qui saisit des coordonnées fictives sans se déplacer vers l'exploitation, introduit des anomalies qui, si elles ne sont pas détectées et traitées, peuvent fausser l'ensemble des analyses subséquentes.
+La collecte de coordonnees GPS sur le terrain est une operation techniquement delicate, sujette a de multiples sources d'erreur. Un enqueteur qui enregistre une coordonnee sans attendre la stabilisation du signal GPS, qui inverse les champs latitude et longitude lors de la saisie manuelle, ou --- dans des cas plus graves --- qui saisit des coordonnees fictives sans se deplacer vers l'exploitation, introduit des anomalies qui, si elles ne sont pas detectees et traitees, peuvent fausser l'ensemble des analyses subsequentes.
 
-Ces erreurs ne sont pas anodines. Une superficie agricole calculée à partir de coordonnées GPS erronées peut conduire à une sous-estimation ou une surestimation des rendements, biaisant les politiques d'appui au secteur agricole. Il est donc impératif de disposer d'un pipeline de validation géographique systématique, documentable et reproductible, avant toute utilisation analytique des données GPS.
+Ces erreurs ne sont pas anodines. Une superficie agricole calculee a partir de coordonnees GPS erronees peut conduire a une sous-estimation ou une surestimation des rendements, biaisant les politiques d'appui au secteur agricole. Il est donc imperatif de disposer d'un pipeline de validation geographique systematique, documentable et reproductible, avant toute utilisation analytique des donnees GPS.
 
 ## Objectifs et structure du rapport {-}
 
-Ce rapport poursuit **cinq objectifs pédagogiques** clairement articulés : **(1)** mettre en place un système de validation géographique systématique sous R ; **(2)** construire une taxonomie des erreurs GPS et identifier leurs causes probables ; **(3)** détecter les doublons spatiaux en distinguant leurs origines légitimes des fraudes probables ; **(4)** quantifier les surfaces cultivées via l'emprise GPS en l'absence de polygones de parcelles ; **(5)** mesurer l'impact des corrections sur les estimations finales et vérifier l'absence de biais de sélection.
+Ce rapport poursuit **cinq objectifs pedagogiques** clairement articules : **(1)** mettre en place un systeme de validation geographique systematique sous R ; **(2)** construire une taxonomie des erreurs GPS et identifier leurs causes probables ; **(3)** detecter les doublons spatiaux en distinguant leurs origines legitimes des fraudes probables ; **(4)** quantifier les surfaces cultivees via l'emprise GPS en l'absence de polygones de parcelles ; **(5)** mesurer l'impact des corrections sur les estimations finales et verifier l'absence de biais de selection.
 
-Trois pièges méthodologiques majeurs sont explicitement anticipés et traités tout au long de l'analyse. **Le Piège 1** : un point situé hors des frontières peut résulter d'une projection mal définie plutôt que d'une vraie erreur GPS. **Le Piège 2** : deux points identiques peuvent correspondre à une même parcelle visitée lors de deux passages distincts --- une situation parfaitement légitime dans le protocole LSMS-ISA. **Le Piège 3** : exclure des observations sans en vérifier les caractéristiques équivaut à introduire un biais de sélection non documenté dans la base nettoyée.
+Trois pieges methodologiques majeurs sont explicitement anticipes et traites tout au long de l'analyse. **Le Piege 1** : un point situe hors des frontieres peut resulter d'une projection mal definie plutot que d'une vraie erreur GPS. **Le Piege 2** : deux points identiques peuvent correspondre a une meme parcelle visitee lors de deux passages distincts --- une situation parfaitement legitime dans le protocole LSMS-ISA. **Le Piege 3** : exclure des observations sans en verifier les caracteristiques equivaut a introduire un biais de selection non documente dans la base nettoyee.
 
-Le rapport s'organise en quatre sections. La **Section 1** pose le cadre conceptuel et la taxonomie des erreurs GPS. La **Section 2** présente les données et la méthodologie. La **Section 3** expose les résultats et leur analyse détaillée. La **Section 4** discute les forces et limites de l'approche. Le rapport se conclut par des recommandations opérationnelles.
+Le rapport s'organise en quatre sections. La **Section 1** pose le cadre conceptuel et la taxonomie des erreurs GPS. La **Section 2** presente les donnees et la methodologie. La **Section 3** expose les resultats et leur analyse detaillee. La **Section 4** discute les forces et limites de l'approche. Le rapport se conclut par des recommandations operationnelles.
 
 \newpage
 
@@ -365,28 +362,28 @@ Le rapport s'organise en quatre sections. La **Section 1** pose le cadre concept
 
 # CADRE CONCEPTUEL ET TAXONOMIE DES ERREURS GPS
 
-## La qualité GPS : un concept multidimensionnel
+## La qualite GPS : un concept multidimensionnel
 
-La qualité d'une coordonnée GPS dans une enquête agricole ne se réduit pas à la seule question de savoir si le point se situe dans le territoire enquêté. Elle englobe quatre dimensions complémentaires et indépendantes, qui forment ensemble la base du score composite utilisé dans ce rapport. Ces quatre dimensions sont inspirées du protocole méthodologique LSMS-ISA et adaptées au contexte malien.
+La qualite d'une coordonnee GPS dans une enquete agricole ne se reduit pas a la seule question de savoir si le point se situe dans le territoire enquete. Elle englobe quatre dimensions complementaires et independantes, qui forment ensemble la base du score composite utilise dans ce rapport. Ces quatre dimensions sont inspirees du protocole methodologique LSMS-ISA et adaptees au contexte malien.
 
 \begin{center}
 ```{r tab_dim, results='asis'}
 d <- data.frame(
-  Dim=c("Cohérence territoriale","Cohérence spatiale","Unicité","Représentativité"),
-  Quest=c("Le point est-il dans les frontières du Mali ?",
+  Dim=c("Coherence territoriale","Coherence spatiale","Unicite","Representativite"),
+  Quest=c("Le point est-il dans les frontieres du Mali ?",
           "Le point est-il hors d'une zone aquatique ou humide ?",
-          "Le point est-il unique --- non dupliqué ?",
-          "Le point est-il représentatif du nuage général ?"),
-  Ind=c("hors mali réel","dans eau suspect, zone humide twi","doublon","suspect distance"),
+          "Le point est-il unique --- non duplique ?",
+          "Le point est-il representatif du nuage general ?"),
+  Ind=c("hors mali reel","dans eau suspect, zone humide twi","doublon","suspect distance"),
   M=c("st intersects() en 2 projections (EPSG:3857 et UTM 29N)",
-      "Distance frontière > 50 km + TWI > Q90",
+      "Distance frontiere > 50 km + TWI > Q90",
       "DBSCAN (eps=500m, minPts=2) + variable passage",
-      "Quantile 95% des distances au centroïde")
+      "Quantile 95% des distances au centroide")
 )
 kable(d,booktabs=TRUE,align=c("l","l","l","l"),escape=TRUE,format="latex",
-      col.names=c("Dimension","Question centrale","Indicateur","Méthode de détection"),
-      caption="Les quatre dimensions de la qualité GPS et leurs indicateurs associés") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!30",font_size=9) %>%
+      col.names=c("Dimension","Question centrale","Indicateur","Methode de detection"),
+      caption="Les quatre dimensions de la qualite GPS et leurs indicateurs associes") %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!30",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   column_spec(1,bold=TRUE,width="3cm") %>%
   column_spec(2,width="4cm") %>%
@@ -395,36 +392,36 @@ kable(d,booktabs=TRUE,align=c("l","l","l","l"),escape=TRUE,format="latex",
 ```
 \end{center}
 
-Ces quatre dimensions sont fondamentalement indépendantes : une observation peut parfaitement se situer à l'intérieur du Mali (dimension 1 satisfaite) tout en étant dans une zone inondable (dimension 2 violée) et constituer un doublon avec une autre observation (dimension 3 violée). C'est précisément pourquoi une approche multi-critères, synthétisée dans un score composite, est méthodologiquement supérieure à tout critère unique.
+Ces quatre dimensions sont fondamentalement independantes : une observation peut parfaitement se situer a l'interieur du Mali (dimension 1 satisfaite) tout en etant dans une zone inondable (dimension 2 violee) et constituer un doublon avec une autre observation (dimension 3 violee). C'est precisement pourquoi une approche multi-criteres, synthetisee dans un score composite, est methodologiquement superieure a tout critere unique.
 
 \begin{center}
 \begin{tcolorbox}[colback=OrBox,colframe=OrAccent,arc=3mm,boxrule=0.8pt,top=0.2cm,bottom=0.2cm,width=0.88\textwidth]
-\small\textbf{Principe fondamental de l'analyse :} aucun critère isolé ne suffit à qualifier une anomalie GPS. C'est la \textit{convergence} de plusieurs critères --- matérialisée par un score composite élevé --- qui renforce la certitude de l'anomalie et légitime une décision d'exclusion. Une observation ne sera jamais exclue sur la seule base d'un indicateur unique à score faible.
+\small\textbf{Principe fondamental de l'analyse :} aucun critere isole ne suffit a qualifier une anomalie GPS. C'est la \textit{convergence} de plusieurs criteres --- materialisee par un score composite eleve --- qui renforce la certitude de l'anomalie et legitime une decision d'exclusion. Une observation ne sera jamais exclue sur la seule base d'un indicateur unique a score faible.
 \end{tcolorbox}
 \end{center}
 
-## Taxonomie des erreurs GPS dans les enquêtes LSMS-ISA
+## Taxonomie des erreurs GPS dans les enquetes LSMS-ISA
 
-L'expérience des enquêtes agricoles géoréférencées en Afrique subsaharienne permet d'identifier quatre catégories d'erreurs GPS, distinguées par leur origine probable et leur gravité analytique. Cette taxonomie constitue l'objectif 2 du présent rapport.
+L'experience des enquetes agricoles georeferancees en Afrique subsaharienne permet d'identifier quatre categories d'erreurs GPS, distinguees par leur origine probable et leur gravite analytique. Cette taxonomie constitue l'objectif 2 du present rapport.
 
 \begin{center}
 ```{r tab_taxo, results='asis'}
 t <- data.frame(
-  Cat=c("Erreur de projection","Erreur de saisie","Dérive GPS","Fraude enquêteur"),
+  Cat=c("Erreur de projection","Erreur de saisie","Derive GPS","Fraude enqueteur"),
   Desc=c("Point hors EPSG:3857 mais dans UTM Zone 29N",
          "Inversion lat./lon. ou chiffres incorrects",
-         "Mauvaise réception satellite, signal instable",
-         "Coordonnées fictives saisies sans déplacement"),
-  Cause=c("Confusion entre systèmes de coordonnées",
-           "Saisie manuelle sans vérification automatique",
-           "Zone forestière, urbaine dense ou conditions météo",
+         "Mauvaise reception satellite, signal instable",
+         "Coordonnees fictives saisies sans deplacement"),
+  Cause=c("Confusion entre systemes de coordonnees",
+           "Saisie manuelle sans verification automatique",
+           "Zone forestiere, urbaine dense ou conditions meteo",
            "Pression sur les volumes, absence de supervision"),
   Grav=c("Moyenne","Haute","Moyenne","Haute")
 )
 kable(t,booktabs=TRUE,align=c("l","l","l","c"),escape=TRUE,format="latex",
-      col.names=c("Catégorie","Description","Cause probable","Gravité"),
-      caption="Taxonomie des erreurs GPS dans les enquêtes LSMS-ISA") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!30",font_size=9) %>%
+      col.names=c("Categorie","Description","Cause probable","Gravite"),
+      caption="Taxonomie des erreurs GPS dans les enquetes LSMS-ISA") %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!30",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   row_spec(c(2,4),background="RougeBox") %>%
   column_spec(1,bold=TRUE,width="3cm") %>%
@@ -434,13 +431,13 @@ kable(t,booktabs=TRUE,align=c("l","l","l","c"),escape=TRUE,format="latex",
 ```
 \end{center}
 
-Il est important de souligner que les **erreurs de projection** constituent un piège méthodologique fréquent et souvent négligé : un analyste non averti pourrait conclure hâtivement qu'un point situé hors du territoire national en EPSG:3857 est nécessairement une erreur GPS, alors qu'il s'agit peut-être simplement d'une confusion de système de coordonnées, facilement corrigible. Ce risque est au cœur du **Piège 1** traité dans ce rapport.
+Il est important de souligner que les **erreurs de projection** constituent un piege methodologique frequent et souvent neglige : un analyste non averti pourrait conclure hativement qu'un point situe hors du territoire national en EPSG:3857 est necessairement une erreur GPS, alors qu'il s'agit peut-etre simplement d'une confusion de systeme de coordonnees, facilement corrigible. Ce risque est au coeur du **Piege 1** traite dans ce rapport.
 
-Les **fraudes d'enquêteurs**, bien que rares dans les enquêtes de qualité comme l'EACI, constituent la forme la plus grave d'anomalie GPS car elles sont intentionnelles et potentiellement systématiques. Leur détection via DBSCAN, croisée avec la variable \texttt{passage}, fait l'objet du **Piège 2**.
+Les **fraudes d'enqueteurs**, bien que rares dans les enquetes de qualite comme l'EACI, constituent la forme la plus grave d'anomalie GPS car elles sont intentionnelles et potentiellement systematiques. Leur detection via DBSCAN, croisee avec la variable \texttt{passage}, fait l'objet du **Piege 2**.
 
-## Score composite et règles de classification
+## Score composite et regles de classification
 
-Le score de qualité global est défini comme la somme de cinq indicateurs binaires complémentaires :
+Le score de qualite global est defini comme la somme de cinq indicateurs binaires complementaires :
 
 $$
 \begin{aligned}
@@ -461,15 +458,15 @@ $$
 ```{r tab_score, results='asis'}
 sc <- data.frame(
   Score=c("0","1 ou 2","> 2"),
-  Niv=c("Bon","À vérifier","Suspect"),
-  Sign=c("Aucun critère violé : observation conservée intégralement dans la base nettoyée.",
-         "Un ou deux critères violés : anomalie mineure ou incertitude --- vérification recommandée avant usage.",
-         "Trois critères ou plus violés : anomalies multiples convergentes --- exclusion ou fusion recommandée.")
+  Niv=c("Bon","A verifier","Suspect"),
+  Sign=c("Aucun critere viole : observation conservee integralement dans la base nettoyee.",
+         "Un ou deux criteres violes : anomalie mineure ou incertitude --- verification recommandee avant usage.",
+         "Trois criteres ou plus violes : anomalies multiples convergentes --- exclusion ou fusion recommandee.")
 )
 kable(sc,booktabs=TRUE,align=c("c","c","l"),escape=TRUE,format="latex",
       col.names=c("Score","Niveau","Signification analytique"),
       caption="Grille de classification des observations par score composite") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!30",font_size=9) %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!30",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   row_spec(1,color="VertOK",bold=TRUE) %>%
   row_spec(2,color="OrangeWarn") %>%
@@ -484,25 +481,25 @@ kable(sc,booktabs=TRUE,align=c("c","c","l"),escape=TRUE,format="latex",
 
 <!-- ══════════ SECTION 2 ══════════ -->
 
-# PRÉSENTATION DES DONNÉES ET MÉTHODOLOGIE
+# PRESENTATION DES DONNEES ET METHODOLOGIE
 
-## Sources de données mobilisées
+## Sources de donnees mobilisees
 
-L'analyse mobilise trois sources de données complémentaires, toutes issues de la base LSMS-ISA Mali 2017 diffusée par la Banque mondiale.
+L'analyse mobilise trois sources de donnees complementaires, toutes issues de la base LSMS-ISA Mali 2017 diffusee par la Banque mondiale.
 
 \begin{center}
 ```{r tab_src, results='asis'}
 s <- data.frame(
   F=c("eaci geovariables 2017.csv","eaci17 s01p1.csv","rnaturalearth (package R)"),
-  C=c(paste0("Fichier principal : coordonnées GPS de ",N," exploitations agricoles + 36 variables géographiques (NDVI, TWI, précipitation, élévation, distance aux routes, densité de population, densité de terres cultivées). Source : MLI 2017 EAC-I v03, Banque mondiale."),
-      "Fichier d'identification des ménages enquêtés. Contient les variables grappe, exploitation et passage, permettant de distinguer les doublons légitimes (double visite d'un même ménage) des saisies en double (fraude probable). Piège 2 traité via ce fichier.",
-      "Package R fournissant les polygones des frontières administratives du Mali (niveau 1 : régions). Utilisé pour la validation territoriale en EPSG:3857 et UTM Zone 29N. Source : Natural Earth."),
-  U=c("Base principale","Piège 2","Validation géographique")
+  C=c(paste0("Fichier principal : coordonnees GPS de ",N," exploitations agricoles + 36 variables geographiques (NDVI, TWI, precipitation, elevation, distance aux routes, densite de population, densite de terres cultivees). Source : MLI 2017 EAC-I v03, Banque mondiale."),
+      "Fichier d'identification des menages enquetes. Contient les variables grappe, exploitation et passage, permettant de distinguer les doublons legitimes (double visite d'un meme menage) des saisies en double (fraude probable). Piege 2 traite via ce fichier.",
+      "Package R fournissant les polygones des frontieres administratives du Mali (niveau 1 : regions). Utilise pour la validation territoriale en EPSG:3857 et UTM Zone 29N. Source : Natural Earth."),
+  U=c("Base principale","Piege 2","Validation geographique")
 )
 kable(s,booktabs=TRUE,align=c("l","l","l"),escape=TRUE,format="latex",
-      col.names=c("Source","Description détaillée","Rôle dans l'analyse"),
-      caption="Sources de données mobilisées dans l'analyse GPS") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!30",font_size=9) %>%
+      col.names=c("Source","Description detaillee","Role dans l'analyse"),
+      caption="Sources de donnees mobilisees dans l'analyse GPS") %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!30",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   column_spec(1,bold=TRUE,width="3.5cm") %>%
   column_spec(2,width="8.5cm") %>%
@@ -510,9 +507,9 @@ kable(s,booktabs=TRUE,align=c("l","l","l"),escape=TRUE,format="latex",
 ```
 \end{center}
 
-Un point méthodologique important concerne le **jittering** appliqué par la Banque mondiale aux coordonnées GPS. Afin de protéger la confidentialité des ménages enquêtés, chaque coordonnée a été perturbée par l'ajout d'un bruit aléatoire de quelques centaines de mètres. Cette contrainte est inhérente à la politique de diffusion LSMS-ISA. Elle implique que la position exacte de chaque exploitation ne peut pas être déterminée avec précision, et que certains doublons détectés par DBSCAN peuvent être artificiellement créés par ce mécanisme de perturbation --- d'où l'importance du Piège 2.
+Un point methodologique important concerne le **jittering** applique par la Banque mondiale aux coordonnees GPS. Afin de proteger la confidentialite des menages enquetes, chaque coordonnee a ete perturbee par l'ajout d'un bruit aleatoire de quelques centaines de metres. Cette contrainte est inherente a la politique de diffusion LSMS-ISA. Elle implique que la position exacte de chaque exploitation ne peut pas etre determinee avec precision, et que certains doublons detectes par DBSCAN peuvent etre artificiellement crees par ce mecanisme de perturbation --- d'ou l'importance du Piege 2.
 
-## Packages R utilisés
+## Packages R utilises
 \begin{center}
 \begin{tcolorbox}[colback=BleuBox,colframe=MarineMid,arc=3mm,boxrule=0.8pt,top=0.3cm,bottom=0.3cm,width=0.95\textwidth]
 \centering
@@ -523,10 +520,10 @@ Un point méthodologique important concerne le **jittering** appliqué par la Ba
 \textcolor{white}{\textbf{Objectif dans l'analyse}} \\
 \midrule
 \rowcolor{BleuPale}\texttt{sf} & Gestion des objets spatiaux & Projections (EPSG:3857, UTM), intersections, buffers \\
-\texttt{rnaturalearth} & Données géographiques & Import des frontières officielles du Mali \\
-\rowcolor{BleuPale}\texttt{osmdata} & Données OpenStreetMap & Récupération du réseau hydrographique (zones aquatiques) \\
-\texttt{units} & Gestion des unités & Calcul de surfaces en hectares \\
-\rowcolor{BleuPale}\texttt{dbscan} & Clustering spatial & Détection des doublons spatiaux (DBSCAN, eps=500m) \\
+\texttt{rnaturalearth} & Donnees geographiques & Import des frontieres officielles du Mali \\
+\rowcolor{BleuPale}\texttt{osmdata} & Donnees OpenStreetMap & Recuperation du reseau hydrographique (zones aquatiques) \\
+\texttt{units} & Gestion des unites & Calcul de surfaces en hectares \\
+\rowcolor{BleuPale}\texttt{dbscan} & Clustering spatial & Detection des doublons spatiaux (DBSCAN, eps=500m) \\
 \texttt{ggplot2} + \texttt{geom\_sf} & Visualisation & Cartographie des anomalies GPS \\
 \bottomrule
 \end{tabular}
@@ -537,30 +534,30 @@ Un point méthodologique important concerne le **jittering** appliqué par la Ba
 
 \begin{center}
 \begin{tcolorbox}[colback=OrBox,colframe=OrAccent,arc=2mm,boxrule=0.8pt,width=0.85\textwidth]
-\small\textbf{Note technique :} L'ensemble des traitements est réalisé sous R. Les packages \texttt{sf} et \texttt{units} garantissent des calculs géométriques rigoureux (distances en mètres, surfaces en hectares). \texttt{osmdata} permet d'intégrer les données hydrographiques pour une détection précise des zones aquatiques (delta intérieur du Niger).
+\small\textbf{Note technique :} L'ensemble des traitements est realise sous R. Les packages \texttt{sf} et \texttt{units} garantissent des calculs geometriques rigoureux (distances en metres, surfaces en hectares). \texttt{osmdata} permet d'integrer les donnees hydrographiques pour une detection precise des zones aquatiques (delta interieur du Niger).
 \end{tcolorbox}
 \end{center}
 
-## Architecture du pipeline de validation en six étapes
+## Architecture du pipeline de validation en six etapes
 
 \begin{center}
 ```{r tab_pip, results='asis'}
 p <- data.frame(
-  Et=paste0("Étape ",1:6),
-  Crit=c("Validation géographique","Taxonomie des erreurs","Doublons spatiaux",
-         "Outliers spatiaux","Score et décisions","Sensibilité"),
-  Meth=c("Intersection géométrique en EPSG:3857 ET UTM Zone 29N + TWI > Q90 + NDVI < Q5 + popdensity < Q5",
+  Et=paste0("Etape ",1:6),
+  Crit=c("Validation geographique","Taxonomie des erreurs","Doublons spatiaux",
+         "Outliers spatiaux","Score et decisions","Sensibilite"),
+  Meth=c("Intersection geometrique en EPSG:3857 ET UTM Zone 29N + TWI > Q90 + NDVI < Q5 + popdensity < Q5",
          "Comparaison des 2 projections + NDVI + distance aux routes",
          "DBSCAN (eps=500m, EPSG:3857) + variable passage et exploitation du fichier s01",
-         "Quantile 95% non-paramétrique des distances au centroïde géographique",
-         "Hiérarchie de 7 règles de décision documentées et justifiées",
+         "Quantile 95% non-parametrique des distances au centroide geographique",
+         "Hierarchie de 7 regles de decision documentees et justifiees",
          "Comparaison Q90%, Q95% et Q97.5% sur les estimations finales"),
   Pi=c("P1","--","P2","--","P3","P3")
 )
 kable(p,booktabs=TRUE,align=c("l","l","l","c"),escape=TRUE,format="latex",
-      col.names=c("Étape","Critère","Méthode et seuil retenus","Piège"),
-      caption="Architecture du pipeline de validation GPS en six étapes séquentielles") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!30",font_size=9) %>%
+      col.names=c("Etape","Critere","Methode et seuil retenus","Piege"),
+      caption="Architecture du pipeline de validation GPS en six etapes sequentielles") %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!30",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   row_spec(c(1,3,5,6),background="BleuBox") %>%
   column_spec(1,bold=TRUE,width="1.5cm") %>%
@@ -570,17 +567,17 @@ kable(p,booktabs=TRUE,align=c("l","l","l","c"),escape=TRUE,format="latex",
 ```
 \end{center}
 
-## Justifications des choix méthodologiques clés
+## Justifications des choix methodologiques cles
 
-**Pourquoi deux projections pour la validation territoriale (Piège 1) ?** La détection des points hors territoire est réalisée successivement en EPSG:3857 (Web Mercator, mètres) et en UTM Zone 29N (projection locale adaptée au Mali). Un point identifié comme hors Mali en EPSG:3857 mais qui rentre dans les frontières en UTM Zone 29N est classé comme erreur de projection, et non comme une vraie anomalie GPS. Cette double vérification évite d'exclure à tort des observations parfaitement valides dont les coordonnées n'ont besoin que d'une simple correction de projection.
+**Pourquoi deux projections pour la validation territoriale (Piege 1) ?** La detection des points hors territoire est realisee successivement en EPSG:3857 (Web Mercator, metres) et en UTM Zone 29N (projection locale adaptee au Mali). Un point identifie comme hors Mali en EPSG:3857 mais qui rentre dans les frontieres en UTM Zone 29N est classe comme erreur de projection, et non comme une vraie anomalie GPS. Cette double verification evite d'exclure a tort des observations parfaitement valides dont les coordonnees n'ont besoin que d'une simple correction de projection.
 
-**Pourquoi DBSCAN et la variable passage (Piège 2) ?** L'algorithme DBSCAN identifie les points spatialement très proches (dans un rayon de 500 mètres en EPSG:3857) sans supposer de forme particulière pour les clusters. La variable \texttt{passage} permet ensuite de distinguer trois catégories de doublons aux implications analytiques radicalement différentes : le jittering légitime (à fusionner), la double visite d'un même ménage (à conserver), et la fraude probable (à exclure). Une approche naïve traiterait ces trois cas de la même façon, introduisant une perte artificielle d'observations valides.
+**Pourquoi DBSCAN et la variable passage (Piege 2) ?** L'algorithme DBSCAN identifie les points spatialement tres proches (dans un rayon de 500 metres en EPSG:3857) sans supposer de forme particuliere pour les clusters. La variable \texttt{passage} permet ensuite de distinguer trois categories de doublons aux implications analytiques radicalement differentes : le jittering legitime (a fusionner), la double visite d'un meme menage (a conserver), et la fraude probable (a exclure). Une approche naive traiterait ces trois cas de la meme facon, introduisant une perte artificielle d'observations valides.
 
-**Pourquoi le quantile 95% plutôt que la règle $\bar{d} + 2\sigma$ ?** Le critère classique $\bar{d} + 2\sigma$ suppose une distribution normale des distances au centroïde. Or, la distribution des exploitations agricoles maliennes présente une asymétrie à droite marquée --- l'hypothèse de normalité n'est pas vérifiée. Le quantile 95% est un critère non-paramétrique, robuste à toute forme de distribution, qui garantit que les 5% de points les plus éloignés du centroïde seront systématiquement identifiés.
+**Pourquoi le quantile 95% plutot que la regle $\bar{d} + 2\sigma$ ?** Le critere classique $\bar{d} + 2\sigma$ suppose une distribution normale des distances au centroide. Or, la distribution des exploitations agricoles maliennes presente une asymetrie a droite marquee --- l'hypothese de normalite n'est pas verifiee. Le quantile 95% est un critere non-parametrique, robuste a toute forme de distribution, qui garantit que les 5% de points les plus eloignes du centroide seront systematiquement identifies.
 
 \begin{center}
 \begin{tcolorbox}[colback=VertBox,colframe=VertOK,arc=3mm,boxrule=0.8pt,top=0.2cm,bottom=0.2cm,width=0.88\textwidth]
-\small\textbf{Choix EPSG:3857 pour toutes les opérations géométriques :} les calculs de distances en degrés décimaux (WGS84) sont métriquement incohérents --- un degré de longitude ne représente pas la même distance physique selon la latitude. En projetant systématiquement en EPSG:3857 (mètres), toutes les distances sont métriquement rigoureuses. Le rayon DBSCAN de 500 mètres est ainsi physiquement interprétable, contrairement à une valeur en degrés décimaux.
+\small\textbf{Choix EPSG:3857 pour toutes les operations geometriques :} les calculs de distances en degres decimaux (WGS84) sont metriquement incoherents --- un degre de longitude ne represente pas la meme distance physique selon la latitude. En projetant systematiquement en EPSG:3857 (metres), toutes les distances sont metriquement rigoureuses. Le rayon DBSCAN de 500 metres est ainsi physiquement interpretable, contrairement a une valeur en degres decimaux.
 \end{tcolorbox}
 \end{center}
 
@@ -588,25 +585,25 @@ kable(p,booktabs=TRUE,align=c("l","l","l","c"),escape=TRUE,format="latex",
 
 <!-- ══════════ SECTION 3 ══════════ -->
 
-# RÉSULTATS ET ANALYSE
+# RESULTATS ET ANALYSE
 
-## Tableau de bord global des anomalies détectées
+## Tableau de bord global des anomalies detectees
 
 \begin{center}
 ```{r tab_bord, results='asis'}
 sy <- data.frame(
-  I=c("Hors Mali réel --- vérifié dans 2 projections (Piège 1)",
-      "Erreurs de projection détectées (Piège 1)",
-      "Zones aquatiques suspects (distance > 50 km frontière)",
+  I=c("Hors Mali reel --- verifie dans 2 projections (Piege 1)",
+      "Erreurs de projection detectees (Piege 1)",
+      "Zones aquatiques suspects (distance > 50 km frontiere)",
       "Zones humides (TWI > quantile 90)",
-      "Zones non cultivées (NDVI < quantile 5)",
-      "Zones inhabitées (densité population < quantile 5)",
+      "Zones non cultivees (NDVI < quantile 5)",
+      "Zones inhabitees (densite population < quantile 5)",
       "Erreurs de saisie probables (inversion lat./lon.)",
-      "Dérives GPS détectées",
-      "Doublons spatiaux DBSCAN --- dont jittering légitime",
+      "Derives GPS detectees",
+      "Doublons spatiaux DBSCAN --- dont jittering legitime",
       "Outliers spatiaux (quantile 95%)",
-      "Score 0 --- Bonne qualité GPS",
-      "Score 1-2 --- À vérifier",
+      "Score 0 --- Bonne qualite GPS",
+      "Score 1-2 --- A verifier",
       "Score > 2 --- Suspectes"),
   N=c(sum(donnees$hors_mali_reel),sum(donnees$erreur_projection),
       sum(donnees$dans_eau_suspect),sum(donnees$zone_humide_twi,na.rm=TRUE),
@@ -623,7 +620,7 @@ sy <- data.frame(
 kable(sy,booktabs=TRUE,align=c("l","r","r"),escape=TRUE,format="latex",
       col.names=c("Indicateur","Effectif","Part"),
       caption=paste0("Tableau de bord complet des anomalies GPS --- EACI Mali 2017 (N = ",N,")")) %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!20",font_size=9) %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!20",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   row_spec(11,bold=TRUE,color="VertOK") %>%
   row_spec(12,color="OrangeWarn") %>%
@@ -633,23 +630,23 @@ kable(sy,booktabs=TRUE,align=c("l","r","r"),escape=TRUE,format="latex",
 ```
 \end{center}
 
-**Lecture globale.** Le premier constat est encourageant : avec **`r round(100*n_bon/N,1)`%** d'observations sans aucune anomalie détectable, la base EACI 2017 témoigne d'une collecte GPS globalement bien exécutée. Ce taux, remarquablement élevé pour une enquête de terrain en milieu rural africain où les conditions de réception satellite peuvent être dégradées, suggère un bon encadrement des enquêteurs et un dispositif de contrôle qualité adéquat. La **proportion de zones aquatiques suspects** (`r round(100*sum(donnees$dans_eau_suspect)/N,1)`%) mérite attention : elle reflète en grande partie les exploitations situées dans des zones agricoles éloignées des frontières nationales, comme les plaines irriguées du delta intérieur du Niger, plutôt que de vraies erreurs GPS. Les `r n_doub` **doublons détectés** par DBSCAN ne doivent surtout pas être interprétés comme autant d'erreurs avant vérification de leur origine, comme le montre la section suivante.
+**Lecture globale.** Le premier constat est encourageant : avec **`r round(100*n_bon/N,1)`%** d'observations sans aucune anomalie detectable, la base EACI 2017 temoigne d'une collecte GPS globalement bien executee. Ce taux, remarquablement eleve pour une enquete de terrain en milieu rural africain ou les conditions de reception satellite peuvent etre degradees, suggere un bon encadrement des enqueteurs et un dispositif de controle qualite adequat. La **proportion de zones aquatiques suspects** (`r round(100*sum(donnees$dans_eau_suspect)/N,1)`%) merite attention : elle reflete en grande partie les exploitations situees dans des zones agricoles eloignees des frontieres nationales, comme les plaines irrigues du delta interieur du Niger, plutot que de vraies erreurs GPS. Les `r n_doub` **doublons detectes** par DBSCAN ne doivent surtout pas etre interpretes comme autant d'erreurs avant verification de leur origine, comme le montre la section suivante.
 
-## Validation géographique et traitement du Piège 1
+## Validation geographique et traitement du Piege 1
 
-La première étape du pipeline confronte chaque point GPS au polygone du territoire malien, successivement en EPSG:3857 et en UTM Zone 29N. Cette double vérification est au cœur du **Piège 1**.
+La premiere etape du pipeline confronte chaque point GPS au polygone du territoire malien, successivement en EPSG:3857 et en UTM Zone 29N. Cette double verification est au coeur du **Piege 1**.
 
-Les résultats montrent que **`r sum(donnees$hors_mali)`** point est initialement identifié hors des frontières maliennes en EPSG:3857. Après vérification en UTM Zone 29N, ce même point reste hors territoire --- il s'agit donc d'un **vrai point hors Mali** (`r sum(donnees$hors_mali_reel)` observation), et non d'une erreur de projection. Aucune erreur de projection n'a été détectée dans cette base : le Piège 1 est traité et documenté, sans impact sur les exclusions. La cause probable de cet unique point aberrant est une inversion de latitude et de longitude lors de la saisie par l'enquêteur, comme le suggère la valeur normale de son NDVI qui indique une zone végétalisée, incompatible avec une localisation hors du territoire malien.
+Les resultats montrent que **`r sum(donnees$hors_mali)`** point est initialement identifie hors des frontieres maliennes en EPSG:3857. Apres verification en UTM Zone 29N, ce meme point reste hors territoire --- il s'agit donc d'un **vrai point hors Mali** (`r sum(donnees$hors_mali_reel)` observation), et non d'une erreur de projection. Aucune erreur de projection n'a ete detectee dans cette base : le Piege 1 est traite et documente, sans impact sur les exclusions. La cause probable de cet unique point aberrant est une inversion de latitude et de longitude lors de la saisie par l'enqueteur, comme le suggere la valeur normale de son NDVI qui indique une zone vegetalisee, incompatible avec une localisation hors du territoire malien.
 
 \begin{center}
 \begin{tcolorbox}[colback=VertBox,colframe=VertOK,arc=3mm,boxrule=0.8pt,top=0.2cm,bottom=0.2cm,width=0.88\textwidth]
-\small\textbf{Bilan Piège 1 :} la double vérification en deux projections confirme que l'unique point hors territoire est bien une vraie anomalie GPS et non une erreur de projection. Aucune observation valide n'a été exclue par erreur de projection. Le pipeline traite correctement ce piège méthodologique.
+\small\textbf{Bilan Piege 1 :} la double verification en deux projections confirme que l'unique point hors territoire est bien une vraie anomalie GPS et non une erreur de projection. Aucune observation valide n'a ete exclue par erreur de projection. Le pipeline traite correctement ce piege methodologique.
 \end{tcolorbox}
 \end{center}
 
-## Détection et classification des doublons spatiaux (Piège 2)
+## Detection et classification des doublons spatiaux (Piege 2)
 
-```{r fig_doublons, fig.cap="Répartition des doublons spatiaux par origine --- Piège 2 : la quasi-totalité est attribuable au jittering LSMS, non à des erreurs de collecte",fig.height=3.2}
+```{r fig_doublons, fig.cap="Repartition des doublons spatiaux par origine --- Piege 2 : la quasi-totalite est attribuable au jittering LSMS, non a des erreurs de collecte",fig.height=3.2}
 donnees %>% filter(doublon==1) %>% count(origine_doublon) %>%
   mutate(pct=round(100*n/sum(n),1),label=paste0(n," (",pct,"%)")) %>%
   ggplot(aes(x=reorder(origine_doublon,n),y=n,fill=origine_doublon))+
@@ -660,24 +657,24 @@ donnees %>% filter(doublon==1) %>% count(origine_doublon) %>%
     "Indetermine"="#C8940A","Non doublon"="#AED6F1"))+
   scale_y_continuous(expand=expansion(mult=c(0,0.3)))+
   coord_flip()+
-  labs(title="Origine des doublons spatiaux détectés par DBSCAN (eps = 500 m)",
-       subtitle=paste0("Distinction Piège 2 : doublons légitimes vs fraude --- ",n_doub," doublons au total"),
+  labs(title="Origine des doublons spatiaux detectes par DBSCAN (eps = 500 m)",
+       subtitle="Distinction Piege 2 : doublons legitimes vs fraude --- `r n_doub` doublons au total",
        x=NULL,y="Nombre d'observations",
        caption="Source : MLI_2017_EAC-I_v03, Banque mondiale | Traitement : ZONGO, ISEP2 S4")+
   theme_rp+theme(legend.position="none")
 ```
 
-L'application de DBSCAN avec un rayon de 500 mètres en EPSG:3857 identifie **`r n_doub` doublons spatiaux**, soit `r round(100*n_doub/N,1)`% de la base. Ce chiffre pourrait alarmer un analyste non averti. Cependant, la Figure \ref{fig:fig_doublons} révèle une réalité très différente : **`r n_jitr` doublons sur `r n_doub`** (`r round(100*n_jitr/n_doub,1)`%) sont attribuables au jittering LSMS légitime. Il s'agit de points appartenant à des grappes différentes dont les coordonnées jitterisées se retrouvent dans un rayon de 500 mètres --- une situation entièrement prévisible lorsque la perturbation aléatoire est de l'ordre de quelques centaines de mètres. Ces `r n_jitr` observations sont des **données parfaitement valides** qu'il convient de fusionner et non d'exclure.
+L'application de DBSCAN avec un rayon de 500 metres en EPSG:3857 identifie **`r n_doub` doublons spatiaux**, soit `r round(100*n_doub/N,1)`% de la base. Ce chiffre pourrait alarmer un analyste non averti. Cependant, la Figure \ref{fig:fig_doublons} revele une realite tres differente : **`r n_jitr` doublons sur `r n_doub`** (`r round(100*n_jitr/n_doub,1)`%) sont attribuables au jittering LSMS legitime. Il s'agit de points appartenant a des grappes differentes dont les coordonnees jitterisees se retrouvent dans un rayon de 500 metres --- une situation entierement previsible lorsque la perturbation aleatoire est de l'ordre de quelques centaines de metres. Ces `r n_jitr` observations sont des **donnees parfaitement valides** qu'il convient de fusionner et non d'exclure.
 
 \begin{center}
 \begin{tcolorbox}[colback=BleuBox,colframe=MarineMid,arc=3mm,boxrule=0.8pt,top=0.2cm,bottom=0.2cm,width=0.88\textwidth]
-\small\textbf{Implication analytique majeure --- Piège 2 :} si l'on avait appliqué naïvement la règle "tout doublon = erreur = exclusion", on aurait supprimé `r n_doub` observations valides, soit `r round(100*n_doub/N,1)`\% de la base. Cette perte artificielle aurait réduit la puissance statistique des analyses et potentiellement introduit un biais géographique. La distinction par la variable \texttt{passage} est ici décisive.
+\small\textbf{Implication analytique majeure --- Piege 2 :} si l'on avait applique naivemement la regle "tout doublon = erreur = exclusion", on aurait supprime `r n_doub` observations valides, soit `r round(100*n_doub/N,1)`\% de la base. Cette perte artificielle aurait reduit la puissance statistique des analyses et potentiellement introduit un biais geographique. La distinction par la variable \texttt{passage} est ici decisive.
 \end{tcolorbox}
 \end{center}
 
-## Distribution des distances et détection des outliers spatiaux
+## Distribution des distances et detection des outliers spatiaux
 
-```{r fig_histo, fig.cap="Distribution des distances au centroïde géographique --- asymétrie à droite prononcée justifiant le recours au quantile 95% plutôt qu'à la règle 2-sigma",fig.height=3.5}
+```{r fig_histo, fig.cap="Distribution des distances au centroide geographique --- asymetrie a droite prononcee justifiant le recours au quantile 95% plutot qu'a la regle 2-sigma",fig.height=3.5}
 ggplot(donnees,aes(x=distance_centre/1000))+
   geom_histogram(bins=35,fill="#2E7DC7",color="#0D2B5E",alpha=0.82,linewidth=0.2)+
   geom_vline(xintercept=seuil_dist/1000,color="#8B1A1A",linewidth=1.3,linetype="dashed")+
@@ -687,55 +684,55 @@ ggplot(donnees,aes(x=distance_centre/1000))+
            label=paste0("Q95 = ",round(seuil_dist/1000,0)," km\n(",n_outl," outliers)"),
            vjust=2,hjust=0,color="#8B1A1A",size=2.8,fontface="bold")+
   scale_x_continuous(labels=function(x) paste0(x," km"))+
-  labs(title="Distribution des distances au centroïde géographique des exploitations",
-       subtitle="Seuil non-paramétrique Q95% --- robuste à l'asymétrie de la distribution",
-       x="Distance au centroïde (km)",y="Fréquence",
+  labs(title="Distribution des distances au centroide geographique des exploitations",
+       subtitle="Seuil non-parametrique Q95% --- robuste a l'asymetrie de la distribution",
+       x="Distance au centroide (km)",y="Frequence",
        caption="Source : MLI_2017_EAC-I_v03, Banque mondiale | Traitement : ZONGO, ISEP2 S4")+
   theme_rp
 ```
 
-La Figure \ref{fig:fig_histo} illustre la distribution des distances de chaque exploitation au centroïde géographique du nuage de points. Cette distribution présente une **asymétrie à droite prononcée** : la grande majorité des exploitations se concentre dans une zone centrale du territoire malien (entre 100 et 500 km du centroïde), tandis qu'une petite fraction se trouve à des distances considérables. Cette asymétrie valide le choix du quantile 95% comme critère de détection : la règle $\bar{d} + 2\sigma$ supposerait une distribution normale --- hypothèse clairement non vérifiée ici.
+La Figure \ref{fig:fig_histo} illustre la distribution des distances de chaque exploitation au centroide geographique du nuage de points. Cette distribution presente une **asymetrie a droite prononcee** : la grande majorite des exploitations se concentre dans une zone centrale du territoire malien (entre 100 et 500 km du centroide), tandis qu'une petite fraction se trouve a des distances considerables. Cette asymetrie valide le choix du quantile 95% comme critere de detection : la regle $\bar{d} + 2\sigma$ supposerait une distribution normale --- hypothese clairement non verifiee ici.
 
-Le seuil retenu est $Q_{0.95} = `r round(seuil_dist/1000,0)`$ km. Les **`r n_outl` observations** situées au-delà de ce seuil représentent `r round(100*n_outl/N,1)`% de la base. Ces exploitations sont potentiellement mal localisées, bien que leur situation dans le territoire malien ne permette pas, à elle seule, de conclure à une erreur GPS --- d'où le recours au score composite pour la décision finale.
+Le seuil retenu est $Q_{0.95} = `r round(seuil_dist/1000,0)`$ km. Les **`r n_outl` observations** situees au-dela de ce seuil representent `r round(100*n_outl/N,1)`% de la base. Ces exploitations sont potentiellement mal localisees, bien que leur situation dans le territoire malien ne permette pas, a elle seule, de conclure a une erreur GPS --- d'ou le recours au score composite pour la decision finale.
 
-## Répartition par niveau de qualité et décisions de traitement
+## Repartition par niveau de qualite et decisions de traitement
 
-```{r fig_niveaux, fig.cap="Répartition des exploitations par niveau de qualité GPS --- score composite sur cinq critères",fig.height=3.2}
+```{r fig_niveaux, fig.cap="Repartition des exploitations par niveau de qualite GPS --- score composite sur cinq criteres",fig.height=3.2}
 donnees %>% count(niveau) %>%
   mutate(pct=round(100*n/sum(n),1),label=paste0(n,"\n(",pct,"%)"),
-         nl=recode(niveau,"A_verifier"="À vérifier","Bon"="Bon","Suspect"="Suspect")) %>%
+         nl=recode(niveau,"A_verifier"="A verifier","Bon"="Bon","Suspect"="Suspect")) %>%
   ggplot(aes(x=reorder(nl,-n),y=n,fill=niveau))+
   geom_col(width=0.55,color="#0D2B5E",linewidth=0.3)+
   geom_text(aes(label=label),vjust=-0.2,color="#0D2B5E",size=3,fontface="bold")+
   scale_fill_manual(values=pal_niv)+
   scale_y_continuous(expand=expansion(mult=c(0,0.25)))+
-  labs(title="Répartition des exploitations par niveau de qualité GPS",
+  labs(title="Repartition des exploitations par niveau de qualite GPS",
        subtitle=paste0("EACI Mali 2017 | N = ",format(N,big.mark=" ")," exploitations"),
        x=NULL,y="Nombre d'exploitations",
        caption="Source : MLI_2017_EAC-I_v03, Banque mondiale | Traitement : ZONGO, ISEP2 S4")+
   theme_rp+theme(legend.position="none",panel.grid.major.x=element_blank())
 ```
 
-La Figure \ref{fig:fig_niveaux} synthétise la répartition des `r N` exploitations selon le score composite. Les **`r n_bon` exploitations de bonne qualité** (`r round(100*n_bon/N,1)`%) ne présentent aucun des cinq critères d'anomalie : elles constituent le cœur de la base nettoyée. Les **`r n_aver` exploitations à vérifier** (`r round(100*n_aver/N,1)`%) ont un score de 1 ou 2, ce qui indique une anomalie mineure liée essentiellement au jittering ou à la proximité d'une zone humide. Enfin, les **`r n_susp` exploitations suspectes** (`r round(100*n_susp/N,1)`%) cumulent au moins trois anomalies et requièrent un traitement prioritaire.
+La Figure \ref{fig:fig_niveaux} synthetise la repartition des `r N` exploitations selon le score composite. Les **`r n_bon` exploitations de bonne qualite** (`r round(100*n_bon/N,1)`%) ne presentent aucun des cinq criteres d'anomalie : elles constituent le coeur de la base nettoyee. Les **`r n_aver` exploitations a verifier** (`r round(100*n_aver/N,1)`%) ont un score de 1 ou 2, ce qui indique une anomalie mineure liee essentiellement au jittering ou a la proximite d'une zone humide. Enfin, les **`r n_susp` exploitations suspectes** (`r round(100*n_susp/N,1)`%) cumulent au moins trois anomalies et requierent un traitement prioritaire.
 
 \begin{center}
 ```{r tab_dec, results='asis'}
 td <- as.data.frame(table(donnees$decision))
-colnames(td) <- c("Décision","N")
+colnames(td) <- c("Decision","N")
 td$Part <- paste0(round(100*td$N/N,1),"%")
-jm <- c("Corriger projection"="Erreur de projection corrigible --- point valide après correction",
-        "Exclure fraude"="Fraude probable confirmée par score élevé",
-        "Exclure hors territoire"="Hors Mali réel dans 2 projections --- exclusion certaine",
-        "Fusionner jittering"="Doublon légitime LSMS --- garder une seule observation",
-        "Garder"="Aucune anomalie détectée --- conservation intégrale",
-        "Garder double visite"="Double visite d'un même ménage confirmée par variable passage",
-        "Imputer coordonnees"="Outlier isolé à score faible --- imputation recommandée",
-        "Verifier manuel"="Zone aquatique ou humide --- vérification terrain avant exclusion")
-td$Justification <- jm[as.character(td$Décision)]
+jm <- c("Corriger projection"="Erreur de projection corrigible --- point valide apres correction",
+        "Exclure fraude"="Fraude probable confirmee par score eleve",
+        "Exclure hors territoire"="Hors Mali reel dans 2 projections --- exclusion certaine",
+        "Fusionner jittering"="Doublon legitime LSMS --- garder une seule observation",
+        "Garder"="Aucune anomalie detectee --- conservation integrale",
+        "Garder double visite"="Double visite d'un meme menage confirmee par variable passage",
+        "Imputer coordonnees"="Outlier isole a score faible --- imputation recommandee",
+        "Verifier manuel"="Zone aquatique ou humide --- verification terrain avant exclusion")
+td$Justification <- jm[as.character(td$Decision)]
 kable(td,booktabs=TRUE,align=c("l","r","r","l"),escape=TRUE,format="latex",
-      col.names=c("Décision","N","Part","Justification analytique"),
-      caption="Décisions de traitement hiérarchisées et leurs justifications") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!20",font_size=9) %>%
+      col.names=c("Decision","N","Part","Justification analytique"),
+      caption="Decisions de traitement hierarchisees et leurs justifications") %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!20",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   column_spec(1,bold=TRUE,width="3.5cm") %>%
   column_spec(2:3,width="1cm") %>%
@@ -743,24 +740,24 @@ kable(td,booktabs=TRUE,align=c("l","r","r","l"),escape=TRUE,format="latex",
 ```
 \end{center}
 
-La décision **"Garder"** concerne `r sum(donnees$decision=="Garder")` exploitations, soit `r round(100*sum(donnees$decision=="Garder")/N,1)`% de la base : ces observations sont conservées telles quelles. La décision **"Fusionner jittering"** (`r sum(donnees$decision=="Fusionner jittering")` cas) confirme l'ampleur du phénomène de jittering LSMS --- ces observations sont techniquement valides et ne doivent pas être perdues. La décision **"Vérifier manuel"** (`r sum(donnees$decision=="Verifier manuel")` cas) concerne les exploitations potentiellement en zone humide, pour lesquelles une vérification terrain serait nécessaire avant exclusion définitive. Seul **`r n_excl` point** est exclu de manière certaine --- un résultat frappant qui témoigne de la bonne qualité globale de la collecte EACI 2017.
+La decision **"Garder"** concerne `r sum(donnees$decision=="Garder")` exploitations, soit `r round(100*sum(donnees$decision=="Garder")/N,1)`% de la base : ces observations sont conservees telles quelles. La decision **"Fusionner jittering"** (`r sum(donnees$decision=="Fusionner jittering")` cas) confirme l'ampleur du phenomene de jittering LSMS --- ces observations sont techniquement valides et ne doivent pas etre perdues. La decision **"Verifier manuel"** (`r sum(donnees$decision=="Verifier manuel")` cas) concerne les exploitations potentiellement en zone humide, pour lesquelles une verification terrain serait necessaire avant exclusion definitive. Seul **`r n_excl` point** est exclu de maniere certaine --- un resultat frappant qui temoigne de la bonne qualite globale de la collecte EACI 2017.
 
 ## Carte de localisation des anomalies GPS
 
-```{r fig_carte, fig.cap="Carte géographique des anomalies GPS au Mali --- EACI 2017 --- Points colorés selon le niveau de qualité du score composite",fig.height=6}
-pc$nl <- recode(pc$niveau,"Bon"="Bon","A_verifier"="À vérifier","Suspect"="Suspect")
-pc$nl <- factor(pc$nl,levels=c("Bon","À vérifier","Suspect"))
+```{r fig_carte, fig.cap="Carte geographique des anomalies GPS au Mali --- EACI 2017 --- Points colores selon le niveau de qualite du score composite",fig.height=6}
+pc$nl <- recode(pc$niveau,"Bon"="Bon","A_verifier"="A verifier","Suspect"="Suspect")
+pc$nl <- factor(pc$nl,levels=c("Bon","A verifier","Suspect"))
 ggplot()+
   geom_sf(data=mali_pays,fill="#EEF5FB",color="#0D2B5E",linewidth=0.7)+
   geom_sf(data=pc,aes(color=nl,shape=nl,size=nl),alpha=0.75)+
-  scale_color_manual(name="Niveau de qualité",
-    values=c("Bon"="#2E7DC7","À vérifier"="#C8940A","Suspect"="#8B1A1A"))+
-  scale_shape_manual(name="Niveau de qualité",values=c("Bon"=16,"À vérifier"=17,"Suspect"=8))+
-  scale_size_manual(name="Niveau de qualité",values=c("Bon"=0.5,"À vérifier"=1.0,"Suspect"=2.2))+
+  scale_color_manual(name="Niveau de qualite",
+    values=c("Bon"="#2E7DC7","A verifier"="#C8940A","Suspect"="#8B1A1A"))+
+  scale_shape_manual(name="Niveau de qualite",values=c("Bon"=16,"A verifier"=17,"Suspect"=8))+
+  scale_size_manual(name="Niveau de qualite",values=c("Bon"=0.5,"A verifier"=1.0,"Suspect"=2.2))+
   guides(color=guide_legend(override.aes=list(size=3.5)),
          shape=guide_legend(override.aes=list(size=3.5)),size="none")+
-  labs(title="Localisation géographique des anomalies GPS --- Mali, EACI 2017",
-       subtitle="Score composite sur 5 critères --- Les points suspects sont rares et dispersés",
+  labs(title="Localisation geographique des anomalies GPS --- Mali, EACI 2017",
+       subtitle="Score composite sur 5 criteres --- Les points suspects sont rares et disperses",
        caption="Source : MLI_2017_EAC-I_v03, Banque mondiale | Traitement : ZONGO, ISEP2 S4")+
   theme_void(base_size=10)+
   theme(plot.title=element_text(color="#0D2B5E",face="bold",size=11,hjust=0.5),
@@ -772,11 +769,11 @@ ggplot()+
         plot.background=element_rect(fill="white",color=NA))
 ```
 
-La carte confirme plusieurs observations analytiques importantes. D'abord, les exploitations de **bonne qualité** (points bleus) couvrent l'ensemble du territoire malien de manière cohérente avec la géographie agricole du pays : elles se concentrent dans les zones céréalières du sud, les zones irriguées de l'Office du Niger, et les zones cotonnières de Sikasso. Ensuite, les exploitations **à vérifier** (points orange) présentent une distribution spatiale diffuse, sans concentration particulière dans une région spécifique, ce qui exclut une dérive systématique localisée chez un groupe d'enquêteurs. Enfin, les rares exploitations **suspectes** (points rouges, `r n_susp` au total) sont dispersées sur le territoire sans clustering spatial apparent --- ce qui suggère des incidents individuels plutôt qu'une fraude organisée ou une dérive systématique de la collecte.
+La carte confirme plusieurs observations analytiques importantes. D'abord, les exploitations de **bonne qualite** (points bleus) couvrent l'ensemble du territoire malien de maniere coherente avec la geographie agricole du pays : elles se concentrent dans les zones cerealiere du sud, les zones irrigues de l'Office du Niger, et les zones cotonniere de Sikasso. Ensuite, les exploitations **a verifier** (points orange) presentent une distribution spatiale diffuse, sans concentration particuliere dans une region specifique, ce qui exclut une derive systematique localisee chez un groupe d'enqueteurs. Enfin, les rares exploitations **suspectes** (points rouges, `r n_susp` au total) sont dispersees sur le territoire sans clustering spatial apparent --- ce qui suggere des incidents individuels plutot qu'une fraude organisee ou une derive systematique de la collecte.
 
-## Estimation des surfaces cultivées (Objectif 4)
+## Estimation des surfaces cultivees (Objectif 4)
 
-```{r fig_surf, fig.cap="Distribution des surfaces cultivées estimées --- proxy hybrid\\_V8 appliqué à l'emprise GPS circulaire de rayon 100 m",fig.height=3.2}
+```{r fig_surf, fig.cap="Distribution des surfaces cultivees estimees --- proxy hybrid\\_V8 applique a l'emprise GPS circulaire de rayon 100 m",fig.height=3.2}
 ggplot(donnees,aes(x=surface_cultivee_ha))+
   geom_histogram(bins=30,fill="#27AE60",color="white",alpha=0.85)+
   geom_vline(xintercept=mean(donnees$surface_cultivee_ha,na.rm=TRUE),
@@ -784,34 +781,34 @@ ggplot(donnees,aes(x=surface_cultivee_ha))+
   annotate("text",x=mean(donnees$surface_cultivee_ha,na.rm=TRUE)+0.02,y=Inf,
            label=paste0("Moy. = ",surf_moy," ha"),
            vjust=2,hjust=0,color="#8B1A1A",size=2.8,fontface="bold")+
-  labs(title="Distribution des surfaces cultivées estimées par exploitation agricole",
-       subtitle="Estimation via hybrid_V8 (%) appliqué à l'emprise GPS (buffer circulaire r=100m)",
-       x="Surface cultivée estimée (ha)",y="Fréquence",
+  labs(title="Distribution des surfaces cultivees estimees par exploitation agricole",
+       subtitle="Estimation via hybrid_V8 (%) applique a l'emprise GPS (buffer circulaire r=100m)",
+       x="Surface cultivee estimee (ha)",y="Frequence",
        caption="Source : MLI_2017_EAC-I_v03, Banque mondiale | Traitement : ZONGO, ISEP2 S4")+
   theme_rp
 ```
 
-En l'absence de polygones GPS de parcelles --- les coordonnées EACI étant des points jitterisés et non des contours d'exploitations --- la superficie cultivée est estimée par la formule :
+En l'absence de polygones GPS de parcelles --- les coordonnees EACI etant des points jitterises et non des contours d'exploitations --- la superficie cultivee est estimee par la formule :
 $$\widehat{\text{Superficie}}_i = \pi \times (100)^2 \times \frac{\text{hybrid\_V8}_i}{100} \quad \text{en ha}$$
-où \texttt{hybrid\_V8} est la densité de terres cultivées dans un voisinage de l'exploitation, exprimée en pourcentage, et 100 mètres est le rayon du buffer GPS.
+ou \texttt{hybrid\_V8} est la densite de terres cultivees dans un voisinage de l'exploitation, exprimee en pourcentage, et 100 metres est le rayon du buffer GPS.
 
-La surface cultivée moyenne estimée de **`r surf_moy` ha** est cohérente avec les données disponibles sur les exploitations agricoles maliennes, où les superficies moyennes varient généralement entre 0,3 et 2 ha selon le système de production (cultures pluviales, irriguées, maraîchage). La distribution est asymétrique à droite, avec une forte concentration d'exploitations autour de 0,3-0,8 ha et une queue droite correspondant aux grandes exploitations irriguées.
+La surface cultivee moyenne estimee de **`r surf_moy` ha** est coherente avec les donnees disponibles sur les exploitations agricoles maliennes, ou les superficies moyennes varient generalement entre 0,3 et 2 ha selon le systeme de production (cultures pluiviales, irriguees, maraichage). La distribution est asymetrique a droite, avec une forte concentration d'exploitations autour de 0,3-0,8 ha et une queue droite correspondant aux grandes exploitations irrigues.
 
 \begin{center}
 \begin{tcolorbox}[colback=OrBox,colframe=OrAccent,arc=3mm,boxrule=0.8pt,top=0.2cm,bottom=0.2cm,width=0.88\textwidth]
-\small\textbf{Limite importante à documenter :} la variable \texttt{s7cq07} (superficie déclarée en ha) est indisponible dans le fichier \texttt{eaci\_geovariables\_2017.csv}, toutes les valeurs étant manquantes. L'estimation via \texttt{hybrid\_V8} constitue le meilleur proxy disponible mais ne saurait remplacer la superficie réellement déclarée par l'agriculteur. Cette limite devra être mentionnée dans tout usage analytique de ces estimations.
+\small\textbf{Limite importante a documenter :} la variable \texttt{s7cq07} (superficie declaree en ha) est indisponible dans le fichier \texttt{eaci\_geovariables\_2017.csv}, toutes les valeurs etant manquantes. L'estimation via \texttt{hybrid\_V8} constitue le meilleur proxy disponible mais ne saurait remplacer la superficie reellement declaree par l'agriculteur. Cette limite devra etre mentionnee dans tout usage analytique de ces estimations.
 \end{tcolorbox}
 \end{center}
 
-## Impact des corrections et analyse de sensibilité (Objectif 5 --- Piège 3)
+## Impact des corrections et analyse de sensibilite (Objectif 5 --- Piege 3)
 
 \begin{center}
 ```{r tab_imp, results='asis'}
 im <- rbind(est_av,est_ap)
-colnames(im) <- c("Étape","N","Surf. moy. (ha)","NDVI moyen","hybrid V8 (%)","Dist. moy. (km)")
+colnames(im) <- c("Etape","N","Surf. moy. (ha)","NDVI moyen","hybrid V8 (%)","Dist. moy. (km)")
 kable(im,booktabs=TRUE,align=c("l","r","r","r","r","r"),escape=TRUE,format="latex",
-      caption="Comparaison des estimations avant et après corrections GPS") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!20",font_size=9) %>%
+      caption="Comparaison des estimations avant et apres corrections GPS") %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!20",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   row_spec(2,bold=TRUE,background="VertBox") %>%
   column_spec(1,bold=TRUE,width="3.5cm") %>%
@@ -819,16 +816,16 @@ kable(im,booktabs=TRUE,align=c("l","r","r","r","r","r"),escape=TRUE,format="late
 ```
 \end{center}
 
-Le tableau ci-dessus compare les estimations des principaux indicateurs avant et après application des corrections GPS. Le constat est frappant : les corrections n'apportent quasiment **aucune variation mesurable sur les estimations**, la surface cultivée moyenne et le NDVI restant strictement identiques. Cette stabilité, surprenante à première vue, s'explique mathématiquement par le faible nombre d'observations exclues (`r n_excl` point sur `r N`, soit `r round(100*n_excl/N,2)`%) : avec un seul point exclu, l'impact sur les moyennes est négligeable.
+Le tableau ci-dessus compare les estimations des principaux indicateurs avant et apres application des corrections GPS. Le constat est frappant : les corrections n'apportent quasiment **aucune variation measurable sur les estimations**, la surface cultivee moyenne et le NDVI restant strictement identiques. Cette stabilite, surprenante a premiere vue, s'explique mathematiquement par le faible nombre d'observations exclues (`r n_excl` point sur `r N`, soit `r round(100*n_excl/N,2)`%) : avec un seul point exclu, l'impact sur les moyennes est negligeable.
 
-Ce résultat doit être interprété positivement et non comme un échec du pipeline : il confirme que la base EACI 2017 est **de bonne qualité initiale** et que les anomalies détectées sont rares et isolées. Il ne signifie pas que le pipeline est inutile --- au contraire, il documente rigoureusement l'état de la base, fournit une base méthodologique solide pour les analyses subséquentes, et prévient toute critique ultérieure sur la qualité des données utilisées.
+Ce resultat doit etre interprete positivement et non comme un echec du pipeline : il confirme que la base EACI 2017 est **de bonne qualite initiale** et que les anomalies detectees sont rares et isolees. Il ne signifie pas que le pipeline est inutile --- au contraire, il documente rigoureusement l'etat de la base, fournit une base methodologique solide pour les analyses subsequentes, et previent toute critique ulterieure sur la qualite des donnees utilisees.
 
 \begin{center}
 ```{r tab_sens, results='asis'}
-colnames(sens) <- c("Quantile","N conservés","N exclus","Pct exclus","Surf. moy. (ha)","NDVI moyen")
+colnames(sens) <- c("Quantile","N conserves","N exclus","Pct exclus","Surf. moy. (ha)","NDVI moyen")
 kable(sens,booktabs=TRUE,align=c("l","r","r","r","r","r"),escape=TRUE,format="latex",
-      caption="Analyse de sensibilité des estimations au seuil d'exclusion des outliers") %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!20",font_size=9) %>%
+      caption="Analyse de sensibilite des estimations au seuil d'exclusion des outliers") %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!20",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   row_spec(2,bold=TRUE,background="BleuBox") %>%
   column_spec(1,bold=TRUE,width="2cm") %>%
@@ -844,21 +841,21 @@ ggplot(sens,aes(x=Qc,y=`Surf. moy. (ha)`,group=1))+
   geom_text(aes(label=paste0(`Pct exclus`,"% exclus")),vjust=-1.3,size=2.8,color="#8B1A1A",fontface="bold")+
   scale_y_continuous(expand=expansion(mult=c(0.1,0.25)))+
   labs(title="Robustesse des estimations au choix du seuil d'exclusion des outliers",
-       subtitle="Comparaison Q90%, Q95% et Q97.5% --- stabilité confirmée des estimations",
-       x="Quantile utilisé",y="Surface cultivée moy. (ha)",
+       subtitle="Comparaison Q90%, Q95% et Q97.5% --- stabilite confirmee des estimations",
+       x="Quantile utilise",y="Surface cultivee moy. (ha)",
        caption="Source : MLI_2017_EAC-I_v03, Banque mondiale | Traitement : ZONGO, ISEP2 S4")+
   theme_rp
 ```
 
-L'analyse de sensibilité teste la robustesse des estimations à trois seuils alternatifs. La surface cultivée moyenne varie de `r sens[1,5]` ha (Q90%) à `r sens[3,5]` ha (Q97.5%), soit un écart de `r round(abs(sens[3,5]-sens[1,5]),3)` ha --- moins de `r round(abs(sens[3,5]-sens[1,5])/sens[1,5]*100,1)`% de variation relative. Cette faible variation confirme que le choix du seuil Q95% n'est pas déterminant pour les conclusions analytiques. Le **Piège 3** est ici traité : les estimations sont stables et robustes à la spécification du seuil d'exclusion.
+L'analyse de sensibilite teste la robustesse des estimations a trois seuils alternatifs. La surface cultivee moyenne varie de `r sens[1,5]` ha (Q90%) a `r sens[3,5]` ha (Q97.5%), soit un ecart de `r round(abs(sens[3,5]-sens[1,5]),3)` ha --- moins de `r round(abs(sens[3,5]-sens[1,5])/sens[1,5]*100,1)`% de variation relative. Cette faible variation confirme que le choix du seuil Q95% n'est pas determinant pour les conclusions analytiques. Le **Piege 3** est ici traite : les estimations sont stables et robustes a la specification du seuil d'exclusion.
 
-## Vérification du biais de sélection (Piège 3)
+## Verification du biais de selection (Piege 3)
 
 ```{r tab_biais, results='asis'}
 colnames(biais) <- c("Statut","N","NDVI","TWI","Pluie (mm)","Route (km)","Alt. (m)")
 kable(biais,booktabs=TRUE,align=c("l","r","r","r","r","r","r"),escape=TRUE,format="latex",
-      caption=paste0("Biais de sélection --- différence NDVI exclus vs conservés = ",diff_ndvi,"% (seuil critique : 10%)")) %>%
-  kable_styling(latex_options=c("striped","HOLD_position"),stripe_color="BleuPale!20",font_size=9) %>%
+      caption=paste0("Biais de selection --- difference NDVI exclus vs conserves = ",diff_ndvi,"% (seuil critique : 10%)")) %>%
+  kable_styling(latex_options=c("striped","hold_position"),stripe_color="BleuPale!20",font_size=9) %>%
   row_spec(0,bold=TRUE,color="white",background="MarineDeep") %>%
   row_spec(1,background="VertBox") %>%
   row_spec(2,background="RougeBox") %>%
@@ -866,15 +863,15 @@ kable(biais,booktabs=TRUE,align=c("l","r","r","r","r","r","r"),escape=TRUE,forma
   column_spec(2:7,width="1.9cm")
 ```
 
-```{r fig_biais, fig.cap="Comparaison exclus vs conservés sur quatre indicateurs géographiques --- vérification de l'absence de biais de sélection systématique (Piège 3)",fig.height=3.5}
+```{r fig_biais, fig.cap="Comparaison exclus vs conserves sur quatre indicateurs geographiques --- verification de l'absence de biais de selection systematique (Piege 3)",fig.height=3.5}
 bl <- biais %>% select(Statut,NDVI,TWI,`Route (km)`,`Alt. (m)`) %>%
   pivot_longer(-Statut,names_to="Ind",values_to="Val")
 ggplot(bl,aes(x=Statut,y=Val,fill=Statut))+
   geom_col(color="#0D2B5E",linewidth=0.3)+
   facet_wrap(~Ind,scales="free_y",ncol=2)+
-  scale_fill_manual(values=c("Conservés"="#2E7DC7","Exclus"="#8B1A1A"))+
-  labs(title="Vérification du biais de sélection --- Exclus vs Conservés (Piège 3)",
-       subtitle=paste0("Différence NDVI : ",diff_ndvi,"% < seuil de 10% --- biais non significatif"),
+  scale_fill_manual(values=c("Conserves"="#2E7DC7","Exclus"="#8B1A1A"))+
+  labs(title="Verification du biais de selection --- Exclus vs Conserves (Piege 3)",
+       subtitle=paste0("Difference NDVI : ",diff_ndvi,"% < seuil de 10% --- biais non significatif"),
        x=NULL,y="Valeur moyenne",
        caption="Source : MLI_2017_EAC-I_v03, Banque mondiale | Traitement : ZONGO, ISEP2 S4")+
   theme_rp+theme(legend.position="none",strip.text=element_text(color="#0D2B5E",face="bold",size=8.5))
@@ -882,17 +879,17 @@ ggplot(bl,aes(x=Statut,y=Val,fill=Statut))+
 \normalsize
 \newpage
 \begin{justify}
-La vérification du biais de sélection constitue l'élément central du \textbf{Piège 3}. Le tableau et la Figure 7 comparent les caractéristiques géographiques moyennes des observations exclues et des observations conservées sur cinq indicateurs clés.
+La verification du biais de selection constitue l’element central du \textbf{Piege 3}. Le tableau et la Figure 7 comparent les caracteristiques geographiques moyennes des observations exclues et des observations conservees sur cinq indicateurs cles.
 
-La différence de NDVI entre les deux groupes est de \textbf{3\%}, bien en dessous du seuil critique de 10\%, ce qui ne permet pas de conclure à un biais de sélection comme analytiquement significatif.
+La difference de NDVI entre les deux groupes est de \textbf{3\%}, bien en dessous du seuil critique de 10\%, ce qui ne permet pas de conclure à un biais de selection comme analytiquement significatif.
 
-On observe des différences sur certains indicateurs (précipitation, élévation), mais celles-ci doivent être interprétées avec prudence : l'observation exclue est \textbf{unique} (1 point), ce qui rend toute comparaison statistiquement fragile.
+On observe des differences sur certains indicateurs (precipitation, elevation), mais celles-ci doivent etre interpretees avec prudence : l’observation exclue est \textbf{unique} (1 point), ce qui rend toute comparaison statistiquement fragile.
 
-L'essentiel est que les exclusions réalisées ne créent pas de biais géographique systématique détectable sur les indicateurs de végétation, d'humidité et de proximité aux infrastructures.
+L’essentiel est que les exclusions realisees ne creent pas de biais geographique systematique detectable sur les indicateurs de vegetation, d’humidite et de proximite aux infrastructures.
 \end{justify}
 \begin{center}
 \begin{tcolorbox}[colback=VertBox,colframe=VertOK,arc=3mm,boxrule=0.8pt,top=0.2cm,bottom=0.2cm,width=0.88\textwidth]
-\small\textbf{Conclusion Piège 3 :} avec `r diff_ndvi`\% de différence NDVI (inférieur au seuil de 10\%), les exclusions réalisées dans ce pipeline ne créent pas de biais de sélection géographique systématique. La base nettoyée est représentative de l'ensemble du territoire enquêté. Le Piège 3 est traité et documenté.
+\small\textbf{Conclusion Piege 3 :} avec `r diff_ndvi`\% de difference NDVI (inferieur au seuil de 10\%), les exclusions realisees dans ce pipeline ne creent pas de biais de selection geographique systematique. La base nettoyee est representative de l'ensemble du territoire enquete. Le Piege 3 est traite et documente.
 \end{tcolorbox}
 \end{center}
 
@@ -902,33 +899,33 @@ L'essentiel est que les exclusions réalisées ne créent pas de biais géograph
 
 # DISCUSSION, FORCES ET LIMITES
 
-## Forces méthodologiques de l'approche
+## Forces methodologiques de l'approche
 \justifying
-L'approche déployée dans ce rapport présente plusieurs forces qui la distinguent des diagnostics GPS usuels pratiqués dans les enquêtes agricoles africaines.
+L'approche deployee dans ce rapport presente plusieurs forces qui la distinguent des diagnostics GPS usuels pratiques dans les enquetes agricoles africaines.
 
-**Reproductibilité totale.** L'ensemble du pipeline est codé sous R, documenté et portable. Tout analyste disposant des mêmes données d'entrée peut reproduire exactement les mêmes résultats en exécutant le script. Cette propriété de reproductibilité est le fondement de la rigueur data-scientifique et constitue un préalable indispensable dans un contexte de production statistique publique.
+**Reproductibilite totale.** L'ensemble du pipeline est code sous R, documente et portable. Tout analyste disposant des memes donnees d'entree peut reproduire exactement les memes resultats en executant le script. Cette propriete de reproductibilite est le fondement de la rigueur data-scientifique et constitue un prealable indispensable dans un contexte de production statistique publique.
 
-**Double vérification des projections (Piège 1).** En testant chaque point dans deux systèmes de coordonnées différents, le pipeline élimine le risque de faux positifs liés à une confusion de projection. Cette étape, souvent négligée dans les analyses GPS standard, est pourtant cruciale : une erreur de projection est corrigible, une vraie anomalie GPS ne l'est pas.
+**Double verification des projections (Piege 1).** En testant chaque point dans deux systemes de coordonnees differents, le pipeline elimine le risque de faux positifs lies a une confusion de projection. Cette etape, souvent negligee dans les analyses GPS standard, est pourtant cruciale : une erreur de projection est corrigible, une vraie anomalie GPS ne l'est pas.
 
-**Distinction fine des origines de doublons (Piège 2).** L'utilisation conjointe de DBSCAN et de la variable \texttt{passage} permet de distinguer trois catégories de doublons aux implications analytiques radicalement différentes : le jittering légitime (à fusionner), la double visite (à conserver), et la fraude probable (à exclure). Cette distinction, absente des analyses GPS naïves, évite une perte artificielle et non documentée d'observations valides.
+**Distinction fine des origines de doublons (Piege 2).** L'utilisation conjointe de DBSCAN et de la variable \texttt{passage} permet de distinguer trois categories de doublons aux implications analytiques radicalement differentes : le jittering legitime (a fusionner), la double visite (a conserver), et la fraude probable (a exclure). Cette distinction, absente des analyses GPS naives, evite une perte artificielle et non documentee d'observations valides.
 
-**Documentation du biais de sélection (Piège 3).** La comparaison systématique des caractéristiques des observations exclues et conservées transforme une décision d'exclusion en une décision documentée, défendable devant un auditeur externe. Cette démarche est indispensable dans tout rapport statistique destiné à informer des décisions de politique publique.
+**Documentation du biais de selection (Piege 3).** La comparaison systematique des caracteristiques des observations exclues et conservees transforme une decision d'exclusion en une decision documentee, defensible devant un auditeur externe. Cette demarche est indispensable dans tout rapport statistique destine a informer des decisions de politique publique.
 
 \begin{center}
 \begin{tcolorbox}[colback=BleuBox,colframe=MarineMid,arc=3mm,boxrule=0.8pt,top=0.2cm,bottom=0.2cm,width=0.88\textwidth]
-\small\textbf{Robustesse technique :} utilisation systématique d'EPSG:3857 pour tous les calculs géométriques (distances métriquement cohérentes), DBSCAN avec rayon physiquement interprétable en mètres, et quantile 95\% non-paramétrique robuste à l'asymétrie de la distribution. Ces choix sont justifiés et reproductibles.
+\small\textbf{Robustesse technique :} utilisation systematique d'EPSG:3857 pour tous les calculs geometriques (distances metriquement coherentes), DBSCAN avec rayon physiquement interpretable en metres, et quantile 95\% non-parametrique robuste a l'asymetrie de la distribution. Ces choix sont justifies et reproduisibles.
 \end{tcolorbox}
 \end{center}
 \newpage
-## Limites méthodologiques
+## Limites methodologiques
 
-**Limite 1 --- Le jittering comme source de faux positifs DBSCAN.** La perturbation aléatoire appliquée par la Banque mondiale peut rapprocher artificiellement des exploitations distinctes jusqu'à les faire apparaître comme des doublons. Avec un rayon DBSCAN de 500 mètres, toute paire d'exploitations dont les vraies coordonnées sont distantes de moins de 500 mètres diminuées de l'amplitude du jitter sera détectée comme doublon. Cette limite est inhérente au protocole de diffusion LSMS-ISA et ne peut être surmontée qu'avec accès aux coordonnées non jitterisées, disponibles uniquement auprès de la Banque mondiale sous accord de confidentialité.
+**Limite 1 --- Le jittering comme source de faux positifs DBSCAN.** La perturbation aleatoire appliquee par la Banque mondiale peut rapprocher artificiellement des exploitations distinctes jusqu'a les faire apparaitre comme des doublons. Avec un rayon DBSCAN de 500 metres, toute paire d'exploitations dont les vraies coordonnees sont distantes de moins de 500 metres diminuees de l'amplitude du jitter sera detectee comme doublon. Cette limite est inherente au protocole de diffusion LSMS-ISA et ne peut etre surmontee qu'avec acces aux coordonnees non jitterisees, disponibles uniquement aupres de la Banque mondiale sous accord de confidentialite.
 
-**Limite 2 --- L'approximation des zones aquatiques.** Le critère de distance à la frontière supérieure à 50 km est une approximation grossière. Il ne capture pas le delta intérieur du Niger --- l'une des plus grandes plaines d'inondation d'Afrique de l'Ouest --- qui se situe au cœur du territoire malien, loin des frontières. L'intégration d'une couche hydrographique issue d'OpenStreetMap ou du réseau HDX permettrait une détection plus précise et plus rigoureuse des zones potentiellement aquatiques.
+**Limite 2 --- L'approximation des zones aquatiques.** Le critere de distance a la frontiere superieure a 50 km est une approximation grossiere. Il ne capture pas le delta interieur du Niger --- l'une des plus grandes plaines d'inondation d'Afrique de l'Ouest --- qui se situe au coeur du territoire malien, loin des frontieres. L'integration d'une couche hydrographique issue d'OpenStreetMap ou du reseau HDX permettrait une detection plus precise et plus rigoureuse des zones potentiellement aquatiques.
 
-**Limite 3 --- La surface cultivée comme proxy.** L'estimation de la superficie via \texttt{hybrid\_V8} constitue une approximation méthodologique reconnue, mais présente deux biais potentiels. D'abord, elle suppose que la densité de terres cultivées dans le voisinage du point GPS est représentative de l'exploitation enquêtée, ce qui peut ne pas être le cas dans les zones de fragmentation agricole élevée. Ensuite, le rayon de 100 mètres choisi pour le buffer GPS est arbitraire et ne reflète pas nécessairement la taille réelle des parcelles maliennes, qui varient considérablement selon les régions et les systèmes de production.
+**Limite 3 --- La surface cultivee comme proxy.** L'estimation de la superficie via \texttt{hybrid\_V8} constitue une approximation methodologique reconnue, mais presente deux biais potentiels. D'abord, elle suppose que la densite de terres cultivees dans le voisinage du point GPS est representative de l'exploitation enquetee, ce qui peut ne pas etre le cas dans les zones de fragmentation agricole elevee. Ensuite, le rayon de 100 metres choisi pour le buffer GPS est arbitraire et ne reflete pas necessairement la taille reelle des parcelles maliennes, qui varient considerablement selon les regions et les systemes de production.
 
-**Limite 4 --- Le biais inhérent au quantile 95%.** Ce seuil marque mécaniquement 5% des observations comme suspectes, indépendamment de leur nature réelle. L'analyse de sensibilité montre toutefois que ce choix n'affecte pas significativement les estimations finales, ce qui atténue considérablement cette limite.
+**Limite 4 --- Le biais inherent au quantile 95%.** Ce seuil marque mecaniquement 5% des observations comme suspectes, independamment de leur nature reelle. L'analyse de sensibilite montre toutefois que ce choix n'affecte pas significativement les estimations finales, ce qui attenue considerablement cette limite.
 
 \newpage
 
@@ -938,49 +935,49 @@ L'approche déployée dans ce rapport présente plusieurs forces qui la distingu
 
 ## Une mission remplie {-}
 
-Ce rapport avait pour ambition d'établir un diagnostic complet, rigoureux et reproductible de la qualité des coordonnées GPS de la base EACI 2017 au Mali, en anticipant et en traitant explicitement les pièges méthodologiques que le praticien non averti commettrait facilement.
+Ce rapport avait pour ambition d'etablir un diagnostic complet, rigoureux et reproductible de la qualite des coordonnees GPS de la base EACI 2017 au Mali, en anticipant et en traitant explicitement les pieges methodologiques que le praticien non averti commettrait facilement.
 
-Au terme de ce travail, le bilan est clair et positif : les **cinq objectifs pédagogiques** assignés ont été pleinement atteints, les **six étapes** du traitement statistique ont été documentées et justifiées, et les **trois pièges méthodologiques** ont été explicitement identifiés, traités et documentés avec preuves empiriques à l'appui. La base EACI 2017 présente une **qualité GPS globalement satisfaisante** : `r round(100*n_bon/N,1)`% d'observations sans anomalie détectable, seul `r n_excl` point exclu définitivement sur `r N`, et des corrections sans impact mesurable sur les estimations finales.
+Au terme de ce travail, le bilan est clair et positif : les **cinq objectifs pedagogiques** assignes ont ete pleinement atteints, les **six etapes** du traitement statistique ont ete documentees et justifiees, et les **trois pieges methodologiques** ont ete explicitement identifies, traites et documentes avec preuves empiriques a l'appui. La base EACI 2017 presente une **qualite GPS globalement satisfaisante** : `r round(100*n_bon/N,1)`% d'observations sans anomalie detectable, seul `r n_excl` point exclu definitivement sur `r N`, et des corrections sans impact mesurable sur les estimations finales.
 
-La principale anomalie structurelle détectée n'est pas une erreur de collecte mais une contrainte de diffusion : le **jittering LSMS**, appliqué pour protéger la confidentialité des ménages, génère des doublons apparents (`r n_doub` cas) qui doivent être identifiés et traités comme tels. Cette distinction entre anomalie réelle et artefact méthodologique est au cœur de la contribution analytique de ce rapport.
+La principale anomalie structurelle detectee n'est pas une erreur de collecte mais une contrainte de diffusion : le **jittering LSMS**, applique pour proteger la confidentialite des menages, genere des doublons apparents (`r n_doub` cas) qui doivent etre identifies et traites comme tels. Cette distinction entre anomalie reelle et artefact methodologique est au coeur de la contribution analytique de ce rapport.
 
-## Des avancées méthodologiques {-}
+## Des avancees methodologiques {-}
 
-Sur le plan technique, ce projet illustre la mise en œuvre de plusieurs compétences avancées du statisticien en exercice :
+Sur le plan technique, ce projet illustre la mise en oeuvre de plusieurs competences avancees du statisticien en exercice :
 
-1. **Rigueur géométrique :** Reprojection systématique en EPSG:3857 pour des calculs métriques exacts, et double vérification en UTM Zone 29N pour le traitement du Piège 1.
-2. **Clustering spatial argumenté :** Application de DBSCAN avec un rayon physiquement interprétable (500 m) et enrichissement par la variable \texttt{passage} pour la distinction des origines de doublons (Piège 2).
-3. **Statistiques non-paramétriques :** Utilisation du quantile 95% comme seuil robuste, plus adapté à la distribution asymétrique des distances que le critère $\bar{d} + 2\sigma$.
-4. **Documentation du biais de sélection :** Comparaison systématique exclus vs conservés sur cinq indicateurs géographiques pour la validation du Piège 3.
+1. **Rigueur geometrique :** Reprojection systematique en EPSG:3857 pour des calculs metriques exacts, et double verification en UTM Zone 29N pour le traitement du Piege 1.
+2. **Clustering spatial argumente :** Application de DBSCAN avec un rayon physiquement interpretable (500 m) et enrichissement par la variable \texttt{passage} pour la distinction des origines de doublons (Piege 2).
+3. **Statistiques non-parametriques :** Utilisation du quantile 95% comme seuil robuste, plus adapte a la distribution asymetrique des distances que le critere $\bar{d} + 2\sigma$.
+4. **Documentation du biais de selection :** Comparaison systematique exclus vs conserves sur cinq indicateurs geographiques pour la validation du Piege 3.
 
-## Recommandations opérationnelles {-}
+## Recommandations operationnelles {-}
 
 \begin{center}
 \begin{tcolorbox}[colback=GrisClair,colframe=MarineDeep,arc=3mm,boxrule=1pt,top=0.3cm,bottom=0.3cm,width=0.88\textwidth]
 \begin{enumerate}
-\item \textbf{Former les enquêteurs à la collecte GPS de qualité :} attendre la stabilisation du signal (minimum 5 satellites), vérifier la cohérence géographique immédiate du point enregistré, et utiliser systématiquement les fonctionnalités de contrôle de qualité des appareils GPS.
-\item \textbf{Déployer un contrôle GPS en temps réel (CAPI) :} intégrer dans l'application mobile de collecte une alerte automatique si le point enregistré se situe hors de la zone géographique assignée à l'enquêteur ou dans une zone identifiée comme inhabitable.
-\item \textbf{Implémenter la double mesure GPS :} enregistrer deux prises de coordonnées indépendantes --- au début et à la fin de l'entretien --- pour détecter les dérives instrumentales et identifier les fraudes par incohérence temporelle.
-\item \textbf{Automatiser le pipeline de validation :} intégrer ce script R comme étape systématique post-collecte, avant toute diffusion des données ou lancement d'analyses statistiques sur les données EACI.
-\item \textbf{Auditer les performances GPS par enquêteur :} produire des indicateurs individuels de qualité GPS et les utiliser comme critère d'évaluation des enquêteurs, afin de déceler les dérives précoces.
-\item \textbf{Enrichir la détection des zones aquatiques :} intégrer les couches hydrographiques d'OpenStreetMap ou du réseau HDX Mali pour une détection précise des zones en eau, indépendante de la distance aux frontières nationales.
+\item \textbf{Former les enqueteurs a la collecte GPS de qualite :} attendre la stabilisation du signal (minimum 5 satellites), verifier la coherence geographique immediate du point enregistre, et utiliser systematiquement les fonctionnalites de controle de qualite des appareils GPS.
+\item \textbf{Deployer un controle GPS en temps reel (CAPI) :} integrer dans l'application mobile de collecte une alerte automatique si le point enregistre se situe hors de la zone geographique assignee a l'enqueteur ou dans une zone identifiee comme inhabitable.
+\item \textbf{Implementer la double mesure GPS :} enregistrer deux prises de coordonnees independantes --- au debut et a la fin de l'entretien --- pour detecter les derives instrumentales et identifier les fraudes par incoherence temporelle.
+\item \textbf{Automatiser le pipeline de validation :} integrer ce script R comme etape systematique post-collecte, avant toute diffusion des donnees ou lancement d'analyses statistiques sur les donnees EACI.
+\item \textbf{Auditer les performances GPS par enqueteur :} produire des indicateurs individuels de qualite GPS et les utiliser comme critere d'evaluation des enqueteurs, afin de deceler les derives precoces.
+\item \textbf{Enrichir la detection des zones aquatiques :} integrer les couches hydrographiques d'OpenStreetMap ou du reseau HDX Mali pour une detection precise des zones en eau, independante de la distance aux frontieres nationales.
 \end{enumerate}
 \end{tcolorbox}
 \end{center}
 
 ## Perspectives {-}
 
-Ce pipeline ouvre de vastes perspectives d'approfondissement. La base nettoyée pourrait servir de fondation à des analyses spatiales avancées : estimation des superficies cultivées par télémétrie via des données Sentinel-2, croisement avec des données d'imagerie satellitaire NDVI pour la validation des rendements déclarés, ou modélisation de la distribution géographique des systèmes de production. L'extension du pipeline aux autres vagues de l'EACI (2014, 2018) permettrait également une analyse longitudinale de l'évolution de la qualité GPS, et contribuerait à identifier les régions ou les périodes où la collecte est systématiquement plus difficile.
+Ce pipeline ouvre de vastes perspectives d'approfondissement. La base nettoyee pourrait servir de fondation a des analyses spatiales avancees : estimation des superficies cultivees par telemetrie via des donnees Sentinel-2, croisement avec des donnees d'imagerie satellitaire NDVI pour la validation des rendements declares, ou modelisation de la distribution geographique des systemes de production. L'extension du pipeline aux autres vagues de l'EACI (2014, 2018) permettrait egalement une analyse longitudinale de l'evolution de la qualite GPS, et contribuerait a identifier les regions ou les periodes ou la collecte est systematiquement plus difficile.
 
-En définitive, ce projet démontre qu'il est possible, avec rigueur et méthode, de transformer des données GPS brutes en une information géographique fiable et exploitable. Dans un contexte où les politiques agricoles maliennes s'appuient de plus en plus sur des analyses spatiales pour cibler les interventions, garantir la qualité des coordonnées GPS n'est plus un luxe technique : **c'est un préalable indispensable à toute analyse agricole de qualité**.
+En definitive, ce projet demontre qu'il est possible, avec rigueur et methode, de transformer des donnees GPS brutes en une information geographique fiable et exploitable. Dans un contexte ou les politiques agricoles maliennes s'appuient de plus en plus sur des analyses spatiales pour cibler les interventions, garantir la qualite des coordonnees GPS n'est plus un luxe technique : **c'est un prealable indispensable a toute analyse agricole de qualite**.
 
 \vspace{1cm}
 
 \begin{center}
 \begin{tcolorbox}[colback=MarineDeep,colframe=OrAccent,width=0.77\textwidth,
   arc=5mm,boxrule=2pt,center,halign=center,top=0.5cm,bottom=0.5cm]
-\textit{\large\color{BleuPale} Garantir la qualité des coordonnées GPS n'est plus un luxe technique :}\\[0.3cm]
-\textbf{\large\color{white} c'est un préalable indispensable à toute analyse agricole de qualité.}
+\textit{\large\color{BleuPale} Garantir la qualite des coordonnees GPS n'est plus un luxe technique :}\\[0.3cm]
+\textbf{\large\color{white} c'est un prealable indispensable a toute analyse agricole de qualite.}
 \end{tcolorbox}
 \end{center}
 
